@@ -49,13 +49,12 @@ const Login = (props) => {
     <form onSubmit={handleSubmit}>
       <h3></h3>
       <h1>התחברות</h1>
-      <input type="text" name="userName" value={props.currentUser.name} onKeyDown={updateUserName} ref={inputRefUserName} />
-      <input type="password" name="userPassword" onKeyDown={updatePassword} ref={inputRefPassword} />
-      <input type="text" name="fingerPrint" ref={inputRefFingerPrint} />
+      <input type="text" name="userName" onChange={updateUserName} ref={inputRefUserName} />
+      <input type="password" name="userPassword" onChange={updatePassword} ref={inputRefPassword} />
+      <input type="text" name="fingerPrint" ref={inputRefFingerPrint} value={props.currentUser.userName} />
       <button onClick={() => {
         console.log(props.currentUser);
-
-      // log();
+        props.logUser({userName,userPassword});
       }}>submit
       </button>
     </form>
@@ -68,5 +67,5 @@ const mapStateToProps = (state) => {
     currentUser: state.user.currentUser
   }
 }
-// , { logUser }
-export default connect(mapStateToProps)(Login);
+
+export default connect(mapStateToProps,{logUser})(Login);

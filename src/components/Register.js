@@ -1,20 +1,20 @@
 import React, { useState, Component } from "react";
-//import { Form } from "react-bootstrap";
-//import * as ReactBootstrap from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Row, Form } from "react-bootstrap";
+import { connect } from "react-redux";
+import { addUser } from "../store/action/user";
 const Register = (props) => {
 
     const [userId, setUserId] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [birthDate, setBirthDate] = useState('');
-    const [mail, setMail] = useState('');
+    const [profile, setProfile] = useState('');
     const [password, setPassword] = useState('');
     const [userName, setUserName] = useState('');
     const [isDriver, setIsDriver] = useState('');
     const [fingerPrint, setFingerPrint] = useState('');
-    const [validated, setValidated] = useState(false);
+
 
     const inputRefUserId = React.createRef()
     const inputRefFirstName = React.createRef()
@@ -28,83 +28,99 @@ const Register = (props) => {
 
 
 
-    const updateInputs = () => {
+    const updateId = () => {
         const inputTextUserId = inputRefUserId.current.value
         setUserId(inputTextUserId);
+        setProfile(0);
+    }
+    const updateFirstName=()=>{
         const inputTextFirstName = inputRefFirstName.current.value
         setFirstName(inputTextFirstName);
+    }
+    const updateLastName=()=>{
         const inputTextLastName = inputRefLastName.current.value
         setLastName(inputTextLastName);
+    }
+    const updateBirthDate=()=>{ 
         const inputTextBirthDate = inputRefBirthDate.current.value
         setBirthDate(inputTextBirthDate);
-
-        const inputTextMail = inputRefMail.current.value
-        setMail(inputTextMail);
-
+    }
+// const updateMail=()=>{
+//         const inputTextMail = inputRefMail.current.value
+//         setMail(inputTextMail);
+// }
+const updatePassword=()=>{
         const inputTextPassword = inputRefPassword.current.value
         setPassword(inputTextPassword);
+}
+const updateUserName=()=>{
         const inputTextUserName = inputRefUserName.current.value
         setUserName(inputTextUserName);
+}
+const updateIsDriver=()=>{
         const inputTextIsDriver = inputRefIsDriver.current.value
         setIsDriver(inputTextIsDriver);
-        const inputTextFingerPrint = inputRefFingerPrint.current.value
+}
+const updateFingerPrint=()=>{
+    const inputTextFingerPrint = inputRefFingerPrint.current.value
         setFingerPrint(inputTextFingerPrint);
-    }
+}
+        
+   
 
-    const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
-        setValidated(true);
-    };
+    
 
 
     return (<>
-        <form noValidate validated={validated} onSubmit={handleSubmit}>
+        <form >
             <h1>Regist:</h1>
             <Row className="mb-3">
-                <Form.Group as={Col} md="4" controlId="validationCustom01">
-                    <Form.Control type="text" name="userId" required placeholder="enter id..." ref={inputRefUserId} />
+                <Form.Group as={Col} md="4"  >
+                    <Form.Control type="text" name="userId" required placeholder="enter id..." ref={inputRefUserId}  onKeyUp={updateId}/>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-                    <Form.Control type="text" name="firstName" required placeholder="enter first name..." ref={inputRefFirstName} />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Group as={Col} md="4"  >
+                    <Form.Control type="text" name="firstName" required placeholder="enter first name..." ref={inputRefFirstName} onKeyUp={updateFirstName} />
+                    
                 </Form.Group>
-                <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-                    <Form.Control type="text" name="lastName"  placeholder="enter last name..." className="name-input" ref={inputRefLastName} required />
+                <Form.Group as={Col} md="4" >
+                    <Form.Control type="text" name="lastName"  placeholder="enter last name..." className="name-input" ref={inputRefLastName}onKeyUp={updateLastName}  required />
                 </Form.Group>
             </Row>
             <Row className="mb-3">
-                <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-                    <Form.Control type="text" name="birthDare" placeholder="enter birth date..." ref={inputRefBirthDate} />
+                <Form.Group as={Col} md="4" >
+                    <Form.Control type="text" name="birthDate" placeholder="enter birth date..." onKeyUp={updateBirthDate}  ref={inputRefBirthDate} />
                 </Form.Group>
-                <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-                    <Form.Control type="text" name="mail" placeholder="enter email..." ref={inputRefMail} />
-                </Form.Group>
-                <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-                    <Form.Control type="password" name="password" placeholder="enter password..." ref={inputRefPassword} placeholder="Password" />
+                {/* <Form.Group as={Col} md="4" >
+                    <Form.Control type="text" name="mail" placeholder="enter email..." ref={inputRefMail} onKeyUp={updateMail}  />
+                </Form.Group> */}
+                <Form.Group as={Col} md="4" >
+                    <Form.Control type="password" name="password" placeholder="enter password..." ref={inputRefPassword} placeholder="Password" onKeyUp={updatePassword}  />
                 </Form.Group>
 
             </Row>
             <Row className="mb-3">
-                <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-                    <Form.Control type="text" name="userName" placeholder="enter user name..." ref={inputRefUserName} />
+                <Form.Group as={Col} md="4" >
+                    <Form.Control type="text" name="userName" placeholder="enter user name..." ref={inputRefUserName} onKeyUp={updateUserName}  />
                 </Form.Group>
-                <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-                    <input type="checkbox" name="isDriver" ref={inputRefIsDriver} />
+                <Form.Group as={Col} md="4" >
+                    <input type="checkbox" name="isDriver" ref={inputRefIsDriver} onKeyUp={updateIsDriver}  />
                 </Form.Group>
-                <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-                    <Form.Control type="text" name="fingerPrint" ref={inputRefFingerPrint} />
+                <Form.Group as={Col} md="4" >
+                    <Form.Control type="text" name="fingerPrint" ref={inputRefFingerPrint} onKeyUp={updateFingerPrint}  />
                 </Form.Group>
 
             </Row>
-            <Form.Control type="submit" onClick={updateInputs} />
+            <button onClick={props.addUser({userId,firstName,lastName,birthDate,userName,password,fingerPrint,profile,isDriver})} >Regist</button>
         </form>
 
     </>)
 }
-export default Register;
+const mapStateToProps = (state) => {
+    return {
+      currentUser: state.user.currentUser
+    }
+  }
+
+  export default connect(mapStateToProps,{addUser})(Register);
+  

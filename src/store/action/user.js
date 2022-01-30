@@ -1,23 +1,39 @@
 import * as ActionTypes from '../ActionTypes';
 import axios from 'axios';
 
-
+export const addUser=(user)=>{
+    return(dispatch)=>{
+        console.log("inside the dispathhh");
+        axios.post(`https://localhost:44321/api/user/addUser`,user)
+        .then(response=>{
+            console.log("inside the response of register");
+            console.log(response.data);
+            dispatch(saveUser(response.data));
+        }
+        )
+        .catch(error=>{
+            console.log("inside the cath of the register");
+            console.log(error);
+        })
+    }
+}
 export const logUser = (user) => {
     return (dispatch) => {
-        console.log("inside the dispathghhhhh");
-        axios.get(`https://localhost:44321/api/values`)
+        axios.get(`https://localhost:44321/api/user/getUser?username=${user.userName}&password=${user.userPassword}`)
             .then(response => {
                 console.log(response);
-                if (response.data.length === 0) {
+                if (response.data == null || response.data==undefined) {
 
                     alert("this user is not exist in the system")
                 }
                 else {
-                    dispatch(saveUser(response.data[0].id))
+                    console.log("success");
+                    dispatch(saveUser(response.data))
                 }
             })
-            .catch(err => {
-                console.log(err);
+            .catch(error => {
+                console.log("inside the catch");
+                console.log(error);
             })
     }
 }
