@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Row, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { addUser } from "../store/action/user";
+
+
 const Register = (props) => {
 
     const [userId, setUserId] = useState('');
@@ -111,7 +113,10 @@ const updateFingerPrint=()=>{
                 </Form.Group>
 
             </Row>
-            <button onClick={props.addUser({userId,firstName,lastName,birthDate,userName,password,fingerPrint,profile,isDriver})} >Regist</button>
+            <button onClick={() => {
+            console.log(props.currentUser);
+            props.addUser({userId,firstName,lastName,birthDate,userName,password,fingerPrint,profile,isDriver})}} >
+            Regist</button>
         </form>
 
     </>)

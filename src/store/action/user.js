@@ -1,14 +1,14 @@
 import * as ActionTypes from '../ActionTypes';
 import axios from 'axios';
 
-export const addUser=(user)=>{
+export const postUser=(user)=>{
     return(dispatch)=>{
         console.log("inside the dispathhh");
         axios.post(`https://localhost:44321/api/user/addUser`,user)
         .then(response=>{
             console.log("inside the response of register");
             console.log(response.data);
-            dispatch(saveUser(response.data));
+            dispatch(addUser(response.data));
         }
         )
         .catch(error=>{
@@ -43,5 +43,11 @@ export const saveUser = (user) => {
     return {
         type: ActionTypes.SAVE_USER,
         payload: user
+    }
+}
+export const addUser=(user)=>{
+    return {
+        type:ActionTypes.ADD_USER,
+        payload:user
     }
 }
