@@ -9,6 +9,7 @@ import { createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router } from 'react-router-dom';
 import {userReducer} from './store/reducers/index'
+import { BrowserRouter } from "react-router-dom";
 
 const combine = combineReducers({user:userReducer});
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -18,7 +19,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
+      {/* <BrowserRouter> */}
         <App />
+        {/* </BrowserRouter> */}
       </Router>
     </Provider>
   </React.StrictMode>,

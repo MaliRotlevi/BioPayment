@@ -3,11 +3,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Row, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { addUser } from "../store/action/user";
+import {postUser} from '../store/action/user'
+import './Login.css';
+import {Button} from '@material-ui/core';
 
 
 const Register = (props) => {
 
-    const [userId, setUserId] = useState('');
+    const [id, setUserId] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [birthDate, setBirthDate] = useState('');
@@ -67,56 +70,63 @@ const updateFingerPrint=()=>{
     const inputTextFingerPrint = inputRefFingerPrint.current.value
         setFingerPrint(inputTextFingerPrint);
 }
-        
-   
-
-    
-
-
     return (<>
         <form >
             <h1>Regist:</h1>
             <Row className="mb-3">
                 <Form.Group as={Col} md="4"  >
-                    <Form.Control type="text" name="userId" required placeholder="enter id..." ref={inputRefUserId}  onKeyUp={updateId}/>
+                    <label>id</label>
+                    <Form.Control type="text" id="inp" name="userId" required placeholder="enter id..." ref={inputRefUserId}  onKeyUp={updateId}/>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} md="4"  >
-                    <Form.Control type="text" name="firstName" required placeholder="enter first name..." ref={inputRefFirstName} onKeyUp={updateFirstName} />
+                <label>first name</label>
+                    <Form.Control type="text" id="inp" name="firstName" required placeholder="enter first name..." ref={inputRefFirstName} onKeyUp={updateFirstName} />
                     
                 </Form.Group>
                 <Form.Group as={Col} md="4" >
-                    <Form.Control type="text" name="lastName"  placeholder="enter last name..." className="name-input" ref={inputRefLastName}onKeyUp={updateLastName}  required />
+                <label>last name</label>
+                    <Form.Control type="text" id="inp" name="lastName"  placeholder="enter last name..." className="name-input" ref={inputRefLastName}onKeyUp={updateLastName}  required />
                 </Form.Group>
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col} md="4" >
-                    <Form.Control type="text" name="birthDate" placeholder="enter birth date..." onKeyUp={updateBirthDate}  ref={inputRefBirthDate} />
+                    <label>birth date</label>
+                    <Form.Control type="text" id="inp" name="birthDate" placeholder="enter birth date..." onKeyUp={updateBirthDate}  ref={inputRefBirthDate} />
                 </Form.Group>
                 {/* <Form.Group as={Col} md="4" >
                     <Form.Control type="text" name="mail" placeholder="enter email..." ref={inputRefMail} onKeyUp={updateMail}  />
                 </Form.Group> */}
                 <Form.Group as={Col} md="4" >
-                    <Form.Control type="password" name="password" placeholder="enter password..." ref={inputRefPassword} placeholder="Password" onKeyUp={updatePassword}  />
+                    <label>password</label>
+                    <Form.Control type="password" id="inp" name="password" placeholder="enter password..." ref={inputRefPassword} onKeyUp={updatePassword}  />
                 </Form.Group>
 
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col} md="4" >
-                    <Form.Control type="text" name="userName" placeholder="enter user name..." ref={inputRefUserName} onKeyUp={updateUserName}  />
+                    <label>user name</label>
+                    <Form.Control type="text" id="inp" id="inp" name="userName" placeholder="enter user name..." ref={inputRefUserName} onKeyUp={updateUserName}  />
                 </Form.Group>
+                <h1> </h1>
                 <Form.Group as={Col} md="4" >
+                    <label>is driver?</label>
                     <input type="checkbox" name="isDriver" ref={inputRefIsDriver} onKeyUp={updateIsDriver}  />
                 </Form.Group>
+                <h1> </h1>
                 <Form.Group as={Col} md="4" >
-                    <Form.Control type="text" name="fingerPrint" ref={inputRefFingerPrint} onKeyUp={updateFingerPrint}  />
+                    <label>finger print</label>
+                    <Form.Control type="text" id="inp" name="fingerPrint" ref={inputRefFingerPrint} onKeyUp={updateFingerPrint}  />
                 </Form.Group>
 
             </Row>
-            <button onClick={() => {
+            <Button  color="primary" variant="contained"
+            onClick={() => {
             console.log(props.currentUser);
-            props.addUser({userId,firstName,lastName,birthDate,userName,password,fingerPrint,profile,isDriver})}} >
-            Regist</button>
+            debugger
+            props.postUser({id,firstName,lastName,birthDate,userName,password,fingerPrint,profile,isDriver})}} >
+            Regist
+            </Button>
         </form>
 
     </>)
@@ -127,5 +137,5 @@ const mapStateToProps = (state) => {
     }
   }
 
-  export default connect(mapStateToProps,{addUser})(Register);
+  export default connect(mapStateToProps,{postUser})(Register);
   

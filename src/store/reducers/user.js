@@ -19,6 +19,7 @@ export const userReducer = (state = initialState, action) => {
             }
         case ActionTypes.ADD_USER:
             {
+                
                 console.log("inside the reduser of add user");
                 return {
                     ...state, currentUser: action.payload
