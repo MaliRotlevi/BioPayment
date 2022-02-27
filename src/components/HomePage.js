@@ -3,8 +3,12 @@ import { Container } from "reactstrap";
 import Loading from "./Loading";
 import Register from "./Register";
 import { Link } from "react-router-dom";
-//import {LinkContainer} from "react-router-bootstrap"
+import { Routes, Route } from 'react-router-dom';
 import Login from './Login'
+import { Details } from '@material-ui/icons';
+import TravelsToUser  from './TravelsToUser';
+import './HomePage.css';
+
 
 const HomePage = (props) => {
     return (
@@ -16,11 +20,11 @@ const HomePage = (props) => {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
 
-                            <Nav.Link href="Register" as={Link} to={Register}>register</Nav.Link>
-                            <Nav.Link href="Loading">loading</Nav.Link>
+                            <Nav.Link><Link to="/Register">register</Link></Nav.Link>
+                            <Nav.Link ><Link to="/Loading">loading</Link></Nav.Link>
                             <NavDropdown title="personal area" id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="Details">details</NavDropdown.Item>
-                                <NavDropdown.Item href="History">travels-history</NavDropdown.Item>
+                                <NavDropdown.Item ><Link to="/Details">details</Link></NavDropdown.Item>
+                                <NavDropdown.Item ><Link to="/TravelsToUser">travels-history</Link></NavDropdown.Item>
                                 <NavDropdown.Divider />
                             </NavDropdown>
                         </Nav>
@@ -30,11 +34,33 @@ const HomePage = (props) => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <div className="auth-wrapper">
+            {/* <div className="auth-wrapper">
                 <div className="auth-inner"><Login></Login>
                 </div>
-            </div>
+            </div> */}
+            {/* <div className="auth-wrapper">
+                <div className="auth-inner"><Register></Register>
+                </div>
+            </div> */}
 
+
+            <Routes>
+                <Route path="/Login" element={<Login />} />
+                <Route path="/Register" element={<Register />} />
+                <Route path="/Loading" element={<Loading />} />
+                <Route path="/TravelsToUser" element={<TravelsToUser />}/>             
+                <Route path="/Details" element={<Details />} />
+                {/* <Route exact path="/exit">
+                    <Message
+                        warning
+                        header="you loged out successfully"
+                        list={[
+                            '',
+                        ]}
+                    />
+                </Route> */}
+                <Route exact path="" element={<Login />} />
+            </Routes>
         </>
     )
 

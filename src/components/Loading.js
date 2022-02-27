@@ -1,66 +1,97 @@
-import './Loading.css';
+import { Radio } from "@mui/material";
 import React, { useState, Component } from "react";
+import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import Box from '@mui/material/Box';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import { FixedSizeList } from 'react-window';
+import './Loading.css'
 
+export default function Loading() {
+    const rows = ["aaa", "bbb", "ccc", "rrr", "dddd", "aaa", "bbb", "ccc", "rrr", "dddd"]
 
-const Loading = (props) => {
-
-    // openPaymentInput()
-    // {
-
-    // }
     return (
-        <div> 
-            <form action="">
-               
-                <div className="row">
-                    <div className="col-md-3">
-                    <div className="btn btn-primary w-100">30</div>
-                    </div>
-                    <div className="col-md-3">
-                    <div className="btn btn-primary w-100">50</div>
-                    </div>
-                    <div className="col-md-3">
-                    <div className="btn btn-primary w-100">100</div>
-                    </div>
-                    <div className="col-md-3">
-                    <div className="btn btn-primary w-100" >other</div>
-                    </div>
-                    </div>
-                    <div className="row">
-                    <div className="col-3">
-                    <div className="inputWithIcon"> <input className="form-control" id="in" type="text"  /> <span className=""> </span> </div>
-                    </div>
-                    </div>
-                 
-                <div className="row">
-                    <div className="col-12">
-                    
-                        <div className="d-flex flex-column px-md-5 px-4 mb-4"> <span>Credit Card</span>
-                            <div className="inputWithIcon"> <input className="form-control" type="text"  /> <span className=""> <img src="https://www.freepnglogos.com/uploads/mastercard-png/mastercard-logo-logok-15.png" alt=""/></span> </div>
+        <>
+            <h1 id='header'>Loading Constract</h1>
+
+            <div id="wrapper">
+                <div id="first">
+                    <Form sx={{ marginLeft: 'auto' }}>
+                        {rows.map((name) => (
+                            <div key={name} className="mb-3">
+                                <Form.Check
+                                    type="radio"
+                                    name={"radioSet"}
+                                    id={name}
+                                    label={name}
+                                />
+
+                            </div>
+                        ))}
+                    </Form>
+                </div>
+                <div id="second">
+                    <Box
+                        sx={{ width: '50%', height: 400, marginLeft: 'auto', maxWidth: 360, bgcolor: 'background.paper' }}
+                    >
+                        <FixedSizeList
+                            height={400}
+                            width={360}
+                            itemSize={46}
+                            itemCount={200}
+                            overscanCount={5}
+                        >
+                            {renderRow}
+                        </FixedSizeList>
+                    </Box>
+                </div>
+            </div>
+
+
+            <div class="container p-0">
+                <div class="card px-4">
+                    <p class="h8 py-3">Payment Details</p>
+                    <div class="row gx-3"></div>
+
+                    <div class="col-12">
+                        <div class="d-flex flex-column">
+                            <p class="text mb-1">Person Name</p> <input class="form-control mb-3" type="text" placeholder="Name" />
                         </div>
                     </div>
-                    <div className="col-md-6">
-                        <div className="d-flex flex-column ps-md-5 px-md-0 px-4 mb-4"> <span>Expiration<span className="ps-1">Date</span></span>
-                            <div className="inputWithIcon"> <input type="text" className="form-control"  /> <span className="fas fa-calendar-alt"></span> </div>
+                    <div class="col-12">
+                        <div class="d-flex flex-column">
+                            <p class="text mb-1">Card Number</p> <input class="form-control mb-3" type="text" placeholder="1234 5678 435678" />
                         </div>
                     </div>
-                    <div className="col-md-6">
-                        <div className="d-flex flex-column pe-md-5 px-md-0 px-4 mb-4"> <span>Code CVV</span>
-                            <div className="inputWithIcon"> <input type="password" className="form-control"  /> <span className="fas fa-lock"></span> </div>
+                    <div class="col-6">
+                        <div class="d-flex flex-column">
+                            <p class="text mb-1">Expiry</p> <input class="form-control mb-3" type="text" placeholder="MM/YYYY" />
                         </div>
                     </div>
-                    <div className="col-12">
-                        <div className="d-flex flex-column px-md-5 px-4 mb-4"> <span>Name</span>
-                            <div className="inputWithIcon"> <input className="form-control text-uppercase" type="text"  /> <span className="far fa-user"></span> </div>
+                    <div class="col-6">
+                        <div class="d-flex flex-column">
+                            <p class="text mb-1">CVV/CVC</p> <input class="form-control mb-3 pt-2 " type="password" placeholder="***" />
                         </div>
                     </div>
-                    
-                    <div className="col-12 px-md-5 px-4 mt-3">
-                        <div className="btn btn-primary w-100">Pay</div>
+                    <div class="col-12">
+                        <div class="btn btn-primary mb-3"> <span class="ps-3">Pay</span> <span class="fas fa-arrow-right"></span> </div>
                     </div>
                 </div>
-                </form>
-        </div>
+            </div>
+
+        </>
+    )
+}
+
+function renderRow(props) {
+    const { index, style } = props;
+
+    return (
+        <ListItem style={style} key={index} component="div" disablePadding>
+            <ListItemButton>
+                <ListItemText primary={`Item ${index + 1}`} />
+            </ListItemButton>
+        </ListItem>
     );
 }
-export default Loading;

@@ -8,7 +8,7 @@ import HomePage from './components/HomePage';
 
 function App() {
   return (<>
-   <HomePage></HomePage>
+    <HomePage></HomePage> 
     {/* <div className="auth-wrapper">
       <div className="auth-inner"><Login></Login>
       </div>
@@ -26,11 +26,15 @@ function App() {
     {/* 
       <br />
       
-      <br />
+      <br />*/}
+      {/* <div className="auth-wrapper">
+      <div className="auth-inner">
       <Loading></Loading>
-      <br />
+      </div>
+      </div> */}
+      {/* <br />
     <TravelToUser></TravelToUser> */}
-  </>
+  </> 
   );
 }
 
