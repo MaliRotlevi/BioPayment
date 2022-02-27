@@ -13,7 +13,10 @@
     position:relative;
     
 }
-
+.card px-4{
+    visibility: hidden;
+   
+}
 #first {
     width:50%;
     display:inline-block;

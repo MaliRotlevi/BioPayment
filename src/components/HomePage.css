@@ -95,4 +95,8 @@
   input::placeholder{
       font-family: 'Fira Sans', sans-serif;
     }
+   #nav1{
+     height: min-content;
+     width:max-content;
+   }
   

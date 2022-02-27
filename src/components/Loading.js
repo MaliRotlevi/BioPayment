@@ -10,7 +10,8 @@ import './Loading.css'
 
 export default function Loading() {
     const rows = ["aaa", "bbb", "ccc", "rrr", "dddd", "aaa", "bbb", "ccc", "rrr", "dddd"]
-
+    const [showPaymentDetails, setshowPaymentDetails] = React.useState(false)
+    const openPaymentDetails = () => setshowPaymentDetails(true)
     return (
         <>
             <h1 id='header'>Loading Constract</h1>
@@ -46,40 +47,42 @@ export default function Loading() {
                         </FixedSizeList>
                     </Box>
                 </div>
+                <div class="btn btn-primary mb-3" id="btnCon" onClick={openPaymentDetails}> <span class="ps-3">continue</span> <span class="fas fa-arrow-right"></span> </div>
+
             </div>
 
+            {showPaymentDetails ?
+                <div class="container p-0" >
+                    <div class="card px-4">
+                        <p class="h8 py-3">Payment Details</p>
+                        <div class="row gx-3"></div>
 
-            <div class="container p-0">
-                <div class="card px-4">
-                    <p class="h8 py-3">Payment Details</p>
-                    <div class="row gx-3"></div>
-
-                    <div class="col-12">
-                        <div class="d-flex flex-column">
-                            <p class="text mb-1">Person Name</p> <input class="form-control mb-3" type="text" placeholder="Name" />
+                        <div class="col-12">
+                            <div class="d-flex flex-column">
+                                <p class="text mb-1">Person Name</p> <input class="form-control mb-3" type="text" placeholder="Name" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="d-flex flex-column">
-                            <p class="text mb-1">Card Number</p> <input class="form-control mb-3" type="text" placeholder="1234 5678 435678" />
+                        <div class="col-12">
+                            <div class="d-flex flex-column">
+                                <p class="text mb-1">Card Number</p> <input class="form-control mb-3" type="text" placeholder="1234 5678 435678" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="d-flex flex-column">
-                            <p class="text mb-1">Expiry</p> <input class="form-control mb-3" type="text" placeholder="MM/YYYY" />
+                        <div class="col-6">
+                            <div class="d-flex flex-column">
+                                <p class="text mb-1">Expiry</p> <input class="form-control mb-3" type="text" placeholder="MM/YYYY" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="d-flex flex-column">
-                            <p class="text mb-1">CVV/CVC</p> <input class="form-control mb-3 pt-2 " type="password" placeholder="***" />
+                        <div class="col-6">
+                            <div class="d-flex flex-column">
+                                <p class="text mb-1">CVV/CVC</p> <input class="form-control mb-3 pt-2 " type="password" placeholder="***" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="btn btn-primary mb-3"> <span class="ps-3">Pay</span> <span class="fas fa-arrow-right"></span> </div>
+                        <div class="col-12">
+                            <div class="btn btn-primary mb-3"> <span class="ps-3">Pay</span> <span class="fas fa-arrow-right"></span> </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
+                : null}
         </>
     )
 }

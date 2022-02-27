@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 import { Routes, Route } from 'react-router-dom';
 import Login from './Login'
 import { Details } from '@material-ui/icons';
-import TravelsToUser  from './TravelsToUser';
+import TravelsToUser from './TravelsToUser';
 import './HomePage.css';
 
 
 const HomePage = (props) => {
-    return (
-        <>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    return (<>
+        <div className='auth-wrapper'>
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" id="nav1" className="auth-inner">
                 <Container>
                     <Navbar.Brand href="HomePage">Bio-Payment</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -34,35 +34,28 @@ const HomePage = (props) => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            {/* <div className="auth-wrapper">
-                <div className="auth-inner"><Login></Login>
-                </div>
-            </div> */}
-            {/* <div className="auth-wrapper">
-                <div className="auth-inner"><Register></Register>
-                </div>
-            </div> */}
 
 
-            <Routes>
-                <Route path="/Login" element={<Login />} />
-                <Route path="/Register" element={<Register />} />
-                <Route path="/Loading" element={<Loading />} />
-                <Route path="/TravelsToUser" element={<TravelsToUser />}/>             
-                <Route path="/Details" element={<Details />} />
-                {/* <Route exact path="/exit">
-                    <Message
-                        warning
-                        header="you loged out successfully"
-                        list={[
-                            '',
-                        ]}
-                    />
-                </Route> */}
+
+            <Routes className="auth-inner">
+                <Route path="/" element={<div className="auth-wrapper">
+                    <div className="auth-inner"><Login /></div></div>} />
+                <Route path="/Register" element={<div className="auth-wrapper">
+                    <div className="auth-inner"><Register />
+                    </div></div>} />
+                <Route path="/Loading" element={<div className="auth-wrapper">
+                    <div className="auth-inner"><Loading /></div></div>} />
+                <Route path="/TravelsToUser" element={<div className="auth-wrapper">
+                    <div className="auth-inner"><TravelsToUser /></div></div>} />
+                <Route path="/Details" element={<div className="auth-wrapper">
+                    <div className="auth-inner"><Details /></div></div>} />
                 <Route exact path="" element={<Login />} />
             </Routes>
-        </>
+            <div />
+        </div>
+    </>
     )
-
 }
+
+
 export default HomePage;
