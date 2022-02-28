@@ -1,55 +1,58 @@
-import { Radio } from "@mui/material";
 import React, { useState, Component } from "react";
-import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { FixedSizeList } from 'react-window';
 import './Loading.css'
+import { Dropdown, MenuItem, DropdownButton, Button } from "react-bootstrap";
+import { Col, Row, Form } from "react-bootstrap";
+
+
 
 export default function Loading() {
-    const rows = ["aaa", "bbb", "ccc", "rrr", "dddd", "aaa", "bbb", "ccc", "rrr", "dddd"]
     const [showPaymentDetails, setshowPaymentDetails] = React.useState(false)
     const openPaymentDetails = () => setshowPaymentDetails(true)
     return (
         <>
             <h1 id='header'>Loading Constract</h1>
+            <div id="btnDropDown">
+                <Row className="mb-3" >
+                    <Form.Group as={Col} md="4" >
+                        <Dropdown>
+                            <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+                                choose travel constract
+                            </Dropdown.Toggle>
 
-            <div id="wrapper">
-                <div id="first">
-                    <Form sx={{ marginLeft: 'auto' }}>
-                        {rows.map((name) => (
-                            <div key={name} className="mb-3">
-                                <Form.Check
-                                    type="radio"
-                                    name={"radioSet"}
-                                    id={name}
-                                    label={name}
-                                />
-
-                            </div>
-                        ))}
-                    </Form>
+                            <Dropdown.Menu variant="dark">
+                                <Dropdown.Item href="#/action-1" active>
+                                    ערך צבור 100
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">ערך צבור 50</Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">ערך צבור 200</Dropdown.Item>
+                                <Dropdown.Divider />
+                                <Dropdown.Item href="#/action-4">חופשי יומי</Dropdown.Item>
+                                <Dropdown.Item href="#/action-4">חופשי שנתי</Dropdown.Item>
+                                <Dropdown.Item href="#/action-4">חופשי חודשי</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Form.Group>
+                </Row>
                 </div>
-                <div id="second">
-                    <Box
-                        sx={{ width: '50%', height: 400, marginLeft: 'auto', maxWidth: 360, bgcolor: 'background.paper' }}
-                    >
-                        <FixedSizeList
-                            height={400}
-                            width={360}
-                            itemSize={46}
-                            itemCount={200}
-                            overscanCount={5}
-                        >
-                            {renderRow}
-                        </FixedSizeList>
-                    </Box>
+                <div id="btnPaymentDetails">
+                <Row className="mb-3">
+                    <Form.Group as={Col} md="4" >
+                        <Button  variant="primary" onClick={openPaymentDetails} size="lg">
+                            payment- details
+                        </Button>
+                    </Form.Group>
+                </Row>
                 </div>
-                <div class="btn btn-primary mb-3" id="btnCon" onClick={openPaymentDetails}> <span class="ps-3">continue</span> <span class="fas fa-arrow-right"></span> </div>
+           
 
-            </div>
+
+            {/* <div class="btn btn-primary mb-3" id="btnCon" onClick={openPaymentDetails}> <span class="ps-3">continue</span> <span class="fas fa-arrow-right"></span> </div> */}
+
+
+
 
             {showPaymentDetails ?
                 <div class="container p-0" >
@@ -82,7 +85,8 @@ export default function Loading() {
                         </div>
                     </div>
                 </div>
-                : null}
+                : null
+            }
         </>
     )
 }

@@ -1,11 +1,10 @@
 import React, { useState, Component } from "react";
 import { logUser } from "../store/action/user";
 import { connect } from "react-redux";
-import {Button} from '@material-ui/core';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import axios from 'axios';
+import { Button } from '@material-ui/core';
 import './Login.css';
+import Divider from '@mui/material/Divider';
+
 
 const Login = (props) => {
   const [userName, setUserName] = useState('');
@@ -51,28 +50,29 @@ const Login = (props) => {
 
   }
   return (<>
-    <form onSubmit={handleSubmit}>        
+    <form onSubmit={handleSubmit}>
       <h1>Login</h1>
       <div className="form-group">
-      <label>User Name</label>
-      <input type="text" name="userName" className="form-control" placeholder="Enter user name..." onChange={updateUserName} ref={inputRefUserName} />
+        <label>User Name</label>
+        <input type="text" name="userName" className="form-control" placeholder="Enter user name..." onChange={updateUserName} ref={inputRefUserName} />
       </div>
       <div className="form-group">
-      <label>Password</label>
-      <input type="password" name="userPassword" className="form-control" placeholder="Enter password..." onChange={updatePassword} ref={inputRefPassword} />
+        <label>Password</label>
+        <input type="password" name="userPassword" className="form-control" placeholder="Enter password..." onChange={updatePassword} ref={inputRefPassword} />
       </div>
+      <Divider>login with fingerPrint</Divider>
       <div className="form-group">
-      <label>FingerPrint</label>
-      <input type="text" name="fingerPrint" className="form-control" placeholder="Enter finger print..." ref={inputRefFingerPrint} defaultValue={props.currentUser.userName} />
+        <label>FingerPrint</label>
+        <input type="text" name="fingerPrint" className="form-control" placeholder="Enter finger print..." ref={inputRefFingerPrint} defaultValue={props.currentUser.userName} />
       </div>
       <h1> </h1>
       <Button color="primary" variant="contained" onClick={() => {
         console.log(props.currentUser);
-        props.logUser({userName,userPassword});
+        props.logUser({ userName, userPassword });
       }}>submit
       </Button>
     </form>
- 
+
   </>)
 
 }
@@ -82,4 +82,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps,{logUser})(Login);
+export default connect(mapStateToProps, { logUser })(Login);
