@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Button } from '@material-ui/core';
 import './Login.css';
 import Divider from '@mui/material/Divider';
+import{getTravelsToUser} from "../store/action/travelsToUser"
 
 
 const Login = (props) => {
@@ -82,4 +83,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { logUser })(Login);
+export default connect(mapStateToProps, { logUser,getTravelsToUser })(Login);

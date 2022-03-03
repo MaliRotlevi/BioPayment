@@ -113,8 +113,9 @@ const Register = (props) => {
                     <Form.Control type="text" id="inp" name="fingerPrint" placeholder="enter fingerPrint..." ref={inputRefFingerPrint} onKeyUp={updateFingerPrint} />
                 </Form.Group>
                 <Form.Group as={Col} md="4" >
-                    {/* <label>driver?</label> */}
-                    <FormControlLabel id="inp" control={<Checkbox  />} label="driver" name="isDriver" ref={inputRefIsDriver} onKeyUp={updateIsDriver}/>
+                    <label>driver</label>
+                    <h1></h1>
+                    <FormControlLabel id="inp" control={<Checkbox  />} label="" name="isDriver" ref={inputRefIsDriver} onKeyUp={updateIsDriver}/>
                     {/* <input type="checkbox" name="isDriver" ref={inputRefIsDriver} onKeyUp={updateIsDriver} /> */}
                 </Form.Group>
             </Row>

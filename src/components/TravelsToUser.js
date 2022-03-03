@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import {connect} from 'react-redux'
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -29,29 +30,32 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
+
+
 function createData(dateTime, line, price) {
     return { dateTime, line, price };
 }
 
-const rows = [
-    createData('22/02/2001', 480, 6.0),
-    createData('23/08/2001', 1, 16.0),
-    createData('24/05/2001', 53, 9.0),
-    createData('25/05/2001', 402, 16.0),
-    createData('25/05/2001', 389, 3.7),
-    createData('22/02/2001', 480, 6.0),
-    createData('23/08/2001', 1, 16.0),
-    createData('24/05/2001', 53, 9.0),
-    createData('25/05/2001', 402, 16.0),
-    createData('25/05/2001', 389, 3.7),
-    createData('22/02/2001', 480, 6.0),
-    createData('23/08/2001', 1, 16.0),
-    createData('24/05/2001', 53, 9.0),
-    createData('25/05/2001', 402, 16.0),
-    createData('25/05/2001', 389, 3.7),
-];
+// const rows = [
+//     createData('22/02/2001', 480, 6.0),
+//     createData('23/08/2001', 1, 16.0),
+//     createData('24/05/2001', 53, 9.0),
+//     createData('25/05/2001', 402, 16.0),
+//     createData('25/05/2001', 389, 3.7),
+//     createData('22/02/2001', 480, 6.0),
+//     createData('23/08/2001', 1, 16.0),
+//     createData('24/05/2001', 53, 9.0),
+//     createData('25/05/2001', 402, 16.0),
+//     createData('25/05/2001', 389, 3.7),
+//     createData('22/02/2001', 480, 6.0),
+//     createData('23/08/2001', 1, 16.0),
+//     createData('24/05/2001', 53, 9.0),
+//     createData('25/05/2001', 402, 16.0),
+//     createData('25/05/2001', 389, 3.7),
+// ];
 
-export default function TravelsToUser() {
+ function TravelsToUser(props) {
+    const travelsList=props.travelsList;
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -63,7 +67,7 @@ export default function TravelsToUser() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {travelsList.map((row) => (
                         <StyledTableRow key={row.dateTime}>
                             <StyledTableCell component="th" scope="row">
                                 {row.dateTime}
@@ -77,3 +81,11 @@ export default function TravelsToUser() {
         </TableContainer>
     );
 }
+
+const mapStateToProps = (state) => {
+    return {
+        travelsList: state.TravelsToUser.travelsListToUser
+    }
+  }
+  
+  export default connect(mapStateToProps, { })(TravelsToUser);

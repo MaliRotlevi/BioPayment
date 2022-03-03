@@ -5,10 +5,12 @@ import Register from "./Register";
 import { Link } from "react-router-dom";
 import { Routes, Route } from 'react-router-dom';
 import Login from './Login'
-import { Details } from '@material-ui/icons';
+import Details from './Details'
+//import { Details } from '@material-ui/icons';
 import TravelsToUser from './TravelsToUser';
 import './HomePage.css';
-
+import Edit from './Edit';
+ 
 
 const HomePage = (props) => {
     return (<>
@@ -25,6 +27,8 @@ const HomePage = (props) => {
                             <NavDropdown title="personal area" id="collasible-nav-dropdown">
                                 <NavDropdown.Item ><Link to="/Details">details</Link></NavDropdown.Item>
                                 <NavDropdown.Item ><Link to="/TravelsToUser">travels-history</Link></NavDropdown.Item>
+                                <NavDropdown.Item ><Link to="/Edit">Edit Details</Link></NavDropdown.Item>
+
                                 <NavDropdown.Divider />
                             </NavDropdown>
                         </Nav>
@@ -49,6 +53,9 @@ const HomePage = (props) => {
                     <div className="auth-inner"><TravelsToUser /></div></div>} />
                 <Route path="/Details" element={<div className="auth-wrapper">
                     <div className="auth-inner"><Details /></div></div>} />
+                <Route path="/Edit" element={<div className="auth-wrapper">
+                    <div className="auth-inner"><Edit />
+                    </div></div>} />
                 <Route exact path="" element={<Login />} />
             </Routes>
             <div />

@@ -1,49 +1,41 @@
 import React, { useState, Component } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Row, Form,Button,ListGroup,ListGroupItem,Badge} from "react-bootstrap";
-import { connect } from "react-redux";
 
 
 
-const Details=(props) =>
+const Edit=() =>
 {
-  
-  
-
     return  (   
 <>
-<h1>Details</h1>
+<h1>Edit Details</h1>
 <Form>
   <Row className="mb-3">
-    <Form.Group as={Col} controlId="formGridFirstName">
-      <Form.Label>First Name</Form.Label>
-      <Form.Control  disabled   value={props.currentUser.firstName}/>
+    <Form.Group as={Col} controlId="formGridName">
+      <Form.Label>Name</Form.Label>
+      <Form.Control  disabled placeholder="Enter email" />
     </Form.Group>
 
-    <Form.Group as={Col} controlId="formGridLastName">
-      <Form.Label>Last Name</Form.Label>
-      <Form.Control  disabled   value={props.currentUser.lastName}/>
-    </Form.Group>
     <Form.Group as={Col} controlId="formGridEmail">
       <Form.Label>Email</Form.Label>
-      <Form.Control  disabled value={props.currentUser.email} />
+      <Form.Control type="password" disabled placeholder="Password" />
     </Form.Group>
   </Row>
   <Row className="mb-3">
-  <Form.Group as={Col} controlId="formGridProfile">
-    <Form.Label>Profile</Form.Label>
-    <Form.Control disabled value={props.currentUser.profileCode} />
+  <Form.Group as={Col} controlId="formGridAddress">
+    <Form.Label>Address</Form.Label>
+    <Form.Control disabled placeholder="1234 Main St" />
   </Form.Group>
 
   <Form.Group as={Col} controlId="formGridUserName">
     <Form.Label>User Name</Form.Label>
-    <Form.Control disabled value={props.currentUser.userName} />
+    <Form.Control disabled placeholder="Apartment, studio, or floor" />
   </Form.Group>
 
   
     <Form.Group as={Col} controlId="formGridPassword">
       <Form.Label>Password</Form.Label>
-      <Form.Control value={props.currentUser.password} />
+      <Form.Control disabled />
     </Form.Group>
 
    
@@ -99,12 +91,27 @@ const Details=(props) =>
 
     )
 }
+export default Edit
 
-const mapStateToProps = (state) => {
-  return {
-    currentUser: state.user.currentUser
-  }
-}
-export default connect(mapStateToProps)(Details);
+{/* <Form.Group as={Col} controlId="formGridState">
+      <Form.Label>State</Form.Label>
+      <Form.Select defaultValue="Choose...">
+        <option>Choose...</option>
+        <option>...</option>
+      </Form.Select>
+    </Form.Group>
+
+    <Form.Group as={Col} controlId="formGridZip">
+      <Form.Label>Zip</Form.Label>
+      <Form.Control disabled />
+    </Form.Group>
+
+  <Form.Group className="mb-3" id="formGridCheckbox">
+    <Form.Check type="checkbox" label="Check me out" />
+  </Form.Group>*/}
+
+  {/*<Button variant="primary" type="submit">
+    Submit
+    </Button>*/}
 
 
