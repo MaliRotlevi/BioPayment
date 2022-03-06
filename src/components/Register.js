@@ -20,13 +20,14 @@ const Register = (props) => {
     const [userName, setUserName] = useState('');
     const [isDriver, setIsDriver] = useState('');
     const [fingerPrint, setFingerPrint] = useState('');
+    const [email, setEmail] = useState('');
 
 
     const inputRefUserId = React.createRef()
     const inputRefFirstName = React.createRef()
     const inputRefLastName = React.createRef()
     const inputRefBirthDate = React.createRef()
-    const inputRefMail = React.createRef()
+    const inputRefEmail = React.createRef()
     const inputRefPassword = React.createRef()
     const inputRefUserName = React.createRef()
     const inputRefIsDriver = React.createRef()
@@ -51,10 +52,10 @@ const Register = (props) => {
         const inputTextBirthDate = inputRefBirthDate.current.value
         setBirthDate(inputTextBirthDate);
     }
-    // const updateMail=()=>{
-    //         const inputTextMail = inputRefMail.current.value
-    //         setMail(inputTextMail);
-    // }
+    const updateEmail = () => {
+        const inputTextEmail = inputRefEmail.current.value
+        setEmail(inputTextEmail);
+    }
     const updatePassword = () => {
         const inputTextPassword = inputRefPassword.current.value
         setPassword(inputTextPassword);
@@ -95,15 +96,16 @@ const Register = (props) => {
                     <label>birth date</label>
                     <Form.Control type="text" id="inp" name="birthDate" placeholder="enter birth date..." onKeyUp={updateBirthDate} ref={inputRefBirthDate} />
                 </Form.Group>
-                {/* <Form.Group as={Col} md="4" >
-                    <Form.Control type="text" name="mail" placeholder="enter email..." ref={inputRefMail} onKeyUp={updateMail}  />
-                </Form.Group> */}
+                <Form.Group as={Col} md="4" >
+                    <label>email</label>
+                    <Form.Control type="text" id="inp" name="email" placeholder="enter email..." ref={inputRefEmail} onKeyUp={updateEmail} />
+                </Form.Group>
                 <Form.Group as={Col} md="4" >
                     <label>password</label>
                     <Form.Control type="password" id="inp" name="password" placeholder="enter password..." ref={inputRefPassword} onKeyUp={updatePassword} />
                 </Form.Group><Form.Group as={Col} md="4" >
                     <label>user name</label>
-                    <Form.Control type="text" id="inp" id="inp" name="userName" placeholder="enter user name..." ref={inputRefUserName} onKeyUp={updateUserName} />
+                    <Form.Control type="text" id="inp"  name="userName" placeholder="enter user name..." ref={inputRefUserName} onKeyUp={updateUserName} />
                 </Form.Group>
 
             </Row>
@@ -115,7 +117,7 @@ const Register = (props) => {
                 <Form.Group as={Col} md="4" >
                     <label>driver</label>
                     <h1></h1>
-                    <FormControlLabel id="inp" control={<Checkbox  />} label="" name="isDriver" ref={inputRefIsDriver} onKeyUp={updateIsDriver}/>
+                    <FormControlLabel id="inp" control={<Checkbox />} label="" name="isDriver" ref={inputRefIsDriver} onKeyUp={updateIsDriver} />
                     {/* <input type="checkbox" name="isDriver" ref={inputRefIsDriver} onKeyUp={updateIsDriver} /> */}
                 </Form.Group>
             </Row>
@@ -123,7 +125,7 @@ const Register = (props) => {
                 onClick={() => {
                     console.log(props.currentUser);
                     debugger
-                    props.postUser({ id, firstName, lastName, birthDate, userName, password, fingerPrint, profile, isDriver })
+                    props.postUser({ id, firstName, lastName, birthDate, userName, password, fingerPrint, profile, isDriver,email})
                 }} >
                 Regist
             </Button>

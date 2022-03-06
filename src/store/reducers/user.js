@@ -12,7 +12,7 @@ const initialState = {
         fingerPrint: "",
         profileCode: 0,
         isDriver: false,
-        email:""
+        email: ""
     }
 }
 
@@ -24,7 +24,7 @@ export const userReducer = (state = initialState, action) => {
             {
                 console.log("inside the reduser");
                 return { ...state, currentUser: action.payload }
-                
+
             }
         case ActionTypes.ADD_USER:
             {
@@ -32,6 +32,13 @@ export const userReducer = (state = initialState, action) => {
                 console.log("inside the reduser of add user");
                 return {
                     ...state, currentUser: action.payload
+                }
+            }
+        case ActionTypes.USER_UPDATE:
+            {
+                return {
+                    ...state,
+                    currentUser:action.payload
                 }
             }
     }

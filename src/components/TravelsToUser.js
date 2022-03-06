@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {connect} from 'react-redux'
+import {getTravelsToUser} from '../store/action/travelsToUser';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -32,32 +33,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
-function createData(dateTime, line, price) {
-    return { dateTime, line, price };
-}
-
-// const rows = [
-//     createData('22/02/2001', 480, 6.0),
-//     createData('23/08/2001', 1, 16.0),
-//     createData('24/05/2001', 53, 9.0),
-//     createData('25/05/2001', 402, 16.0),
-//     createData('25/05/2001', 389, 3.7),
-//     createData('22/02/2001', 480, 6.0),
-//     createData('23/08/2001', 1, 16.0),
-//     createData('24/05/2001', 53, 9.0),
-//     createData('25/05/2001', 402, 16.0),
-//     createData('25/05/2001', 389, 3.7),
-//     createData('22/02/2001', 480, 6.0),
-//     createData('23/08/2001', 1, 16.0),
-//     createData('24/05/2001', 53, 9.0),
-//     createData('25/05/2001', 402, 16.0),
-//     createData('25/05/2001', 389, 3.7),
-// ];
 
  function TravelsToUser(props) {
-    const travelsList=props.travelsList;
-    return (
-        <TableContainer component={Paper}>
+    // const travelsList=props.travelsList;
+    return (<>
+        <button onClick={()=>{props.getTravelsToUser(props.currentUser.id);
+        console.log(props.getTravelsToUser(props.currentUser.id))}}>get the data</button>
+        {/* <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                     <TableRow>
@@ -78,14 +60,16 @@ function createData(dateTime, line, price) {
                     ))}
                 </TableBody>
             </Table>
-        </TableContainer>
+        </TableContainer> */}
+        </>
     );
 }
 
 const mapStateToProps = (state) => {
     return {
-        travelsList: state.TravelsToUser.travelsListToUser
+        travelsList: state.TravelsToUser.travelsListToUser,
+        currentUser:state.user.currentUser
     }
   }
   
-  export default connect(mapStateToProps, { })(TravelsToUser);
+  export default connect(mapStateToProps, {getTravelsToUser})(TravelsToUser);

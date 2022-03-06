@@ -68,9 +68,9 @@ const Login = (props) => {
       </div>
       <h1> </h1>
       <Button color="primary" variant="contained" onClick={() => {
-        console.log(props.currentUser);
         props.logUser({ userName, userPassword });
-      }}>submit
+        console.log(props.currentUser)    
+      }}>Login
       </Button>
     </form>
 
@@ -83,4 +83,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { logUser,getTravelsToUser })(Login);
+export default connect(mapStateToProps, { logUser })(Login);

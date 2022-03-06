@@ -1,5 +1,5 @@
 const initialState={
-    travelsListToUser=[]
+    travelsListToUser:[]
 }
 
 export const travelsToUserReducer = (state = initialState, action) => {
