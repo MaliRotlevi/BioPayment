@@ -2,8 +2,8 @@ import * as ActionTypes from '../ActionTypes';
 
 
 const initialState = {
-    constractsToUser:[],
-    selectedConstract
+    constractsToUser:[]
+    
 }
 
 export const constrctReducer = (state = initialState, action) => {

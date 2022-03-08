@@ -4,6 +4,8 @@ import { Col, Row, Form } from "react-bootstrap";
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button';
 import { updetaUser } from '../store/action/user'
+import './Details.css';
+
 
 const Edit = (props) => {
   const [firstName, setFirstName] = useState(props.currentUser.firstName);
@@ -103,7 +105,7 @@ const Edit = (props) => {
         </Row>
         <Button color="primary" variant="contained" id="btnRegist"
           onClick={() => { props.updetaUser({ id: props.currentUser.id, firstName, lastName, birthDate: props.currentUser.birthDate, userName, password, fingerPrint: props.currentUser.fingerPrint, profileCode, isDriver: props.currentUser.isDriver, email }) }}>
-            Save Changes
+          Save Changes
         </Button>
       </Form>
     </>

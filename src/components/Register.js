@@ -1,21 +1,20 @@
-import React, { useState, Component } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from "react";
 import { Col, Row, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { postUser } from '../store/action/user'
-import './Login.css';
 import { Button } from '@material-ui/core';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-
+import './Login.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Register = (props) => {
 
-    const [id, setUserId] = useState('');
+    const [id, setId] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [birthDate, setBirthDate] = useState('');
-    const [profile, setProfile] = useState('');
+    const [profileCode, setProfile] = useState('');
     const [password, setPassword] = useState('');
     const [userName, setUserName] = useState('');
     const [isDriver, setIsDriver] = useState('');
@@ -23,22 +22,23 @@ const Register = (props) => {
     const [email, setEmail] = useState('');
 
 
-    const inputRefUserId = React.createRef()
+    const inputRefId = React.createRef()
     const inputRefFirstName = React.createRef()
     const inputRefLastName = React.createRef()
     const inputRefBirthDate = React.createRef()
-    const inputRefEmail = React.createRef()
+    const inputRefProfile = React.createRef();
     const inputRefPassword = React.createRef()
     const inputRefUserName = React.createRef()
     const inputRefIsDriver = React.createRef()
     const inputRefFingerPrint = React.createRef()
+    const inputRefEmail = React.createRef()
+
 
 
 
     const updateId = () => {
-        const inputTextUserId = inputRefUserId.current.value
-        setUserId(inputTextUserId);
-        setProfile(0);
+        const inputTextId = inputRefId.current.value
+        setId(inputTextId);
     }
     const updateFirstName = () => {
         const inputTextFirstName = inputRefFirstName.current.value
@@ -52,9 +52,9 @@ const Register = (props) => {
         const inputTextBirthDate = inputRefBirthDate.current.value
         setBirthDate(inputTextBirthDate);
     }
-    const updateEmail = () => {
-        const inputTextEmail = inputRefEmail.current.value
-        setEmail(inputTextEmail);
+    const updateProfie = () => {
+        const inputProfile = inputRefProfile.current.value;
+        setProfile(inputProfile);
     }
     const updatePassword = () => {
         const inputTextPassword = inputRefPassword.current.value
@@ -72,64 +72,77 @@ const Register = (props) => {
         const inputTextFingerPrint = inputRefFingerPrint.current.value
         setFingerPrint(inputTextFingerPrint);
     }
+    const updateEmail = () => {
+        const inputTextEmail = inputRefEmail.current.value
+        setEmail(inputTextEmail);
+    }
     return (<>
-        <form >
-            <h1>Regist:</h1>
+        <Form>
             <Row className="mb-3">
-                <Form.Group as={Col} md="4"  >
-                    <label>id</label>
-                    <Form.Control type="text" id="inp" name="userId" required placeholder="enter id..." ref={inputRefUserId} onKeyUp={updateId} />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Group as={Col} controlId="formGridId">
+                    <Form.Label>id</Form.Label>
+                    <Form.Control ref={inputRefId} onKeyUp={updateId} placeholder="enter id..." />
                 </Form.Group>
-                <Form.Group as={Col} md="4"  >
-                    <label>first name</label>
-                    <Form.Control type="text" id="inp" name="firstName" required placeholder="enter first name..." ref={inputRefFirstName} onKeyUp={updateFirstName} />
+                <Form.Group as={Col} controlId="formGridName">
+                    <Form.Label>first Name</Form.Label>
+                    <Form.Control ref={inputRefFirstName} onKeyUp={updateFirstName} placeholder="enter first name..." />
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridName">
+                    <Form.Label>last Name</Form.Label>
+                    <Form.Control ref={inputRefLastName} onKeyUp={updateLastName} placeholder="enter last name..." />
+                </Form.Group>
 
-                </Form.Group>
-                <Form.Group as={Col} md="4" >
-                    <label>last name</label>
-                    <Form.Control type="text" id="inp" name="lastName" placeholder="enter last name..." className="name-input" ref={inputRefLastName} onKeyUp={updateLastName} required />
-                </Form.Group>
-            </Row>
-            <Row className="mb-3">
-                <Form.Group as={Col} md="4" >
-                    <label>birth date</label>
-                    <Form.Control type="text" id="inp" name="birthDate" placeholder="enter birth date..." onKeyUp={updateBirthDate} ref={inputRefBirthDate} />
-                </Form.Group>
-                <Form.Group as={Col} md="4" >
-                    <label>email</label>
-                    <Form.Control type="text" id="inp" name="email" placeholder="enter email..." ref={inputRefEmail} onKeyUp={updateEmail} />
-                </Form.Group>
-                <Form.Group as={Col} md="4" >
-                    <label>password</label>
-                    <Form.Control type="password" id="inp" name="password" placeholder="enter password..." ref={inputRefPassword} onKeyUp={updatePassword} />
-                </Form.Group><Form.Group as={Col} md="4" >
-                    <label>user name</label>
-                    <Form.Control type="text" id="inp"  name="userName" placeholder="enter user name..." ref={inputRefUserName} onKeyUp={updateUserName} />
-                </Form.Group>
 
             </Row>
             <Row className="mb-3">
-                <Form.Group as={Col} md="4" >
-                    <label>finger print</label>
-                    <Form.Control type="text" id="inp" name="fingerPrint" placeholder="enter fingerPrint..." ref={inputRefFingerPrint} onKeyUp={updateFingerPrint} />
+                <Form.Group as={Col} controlId="formGridEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control ref={inputRefEmail} onKeyUp={updateEmail} placeholder="enter email..." />
                 </Form.Group>
-                <Form.Group as={Col} md="4" >
-                    <label>driver</label>
+                <Form.Group as={Col} controlId="formGridProfileCode">
+                    <Form.Label>Profile</Form.Label>
+                    <Form.Control ref={inputRefProfile} onKeyUp={updateProfie} placeholder="enter profile..." />
+                    <div style={{
+                        display: 'flex',
+                        margin: 'auto',
+                        width: 400,
+                        flexWrap: 'wrap',
+                    }}>
+                        <input type="file" accept="*.pdf" style={{ display: 'none' }} id="contained-button-file" />
+                        <label htmlFor="contained-button-file">
+                            <Button variant="contained" color="primary" component="span">
+                                Upload
+                            </Button>
+                        </label>
+                    </div>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridBirthDate">
+                    <Form.Label>birthDate</Form.Label>
+                    <Form.Control ref={inputRefBirthDate} onKeyUp={updateBirthDate} placeholder="enter birthDate..." />
+                </Form.Group>
+            </Row>
+            <Row className="mb-3">
+            <Form.Group as={Col} controlId="formGridUserName">
+                    <Form.Label>User Name</Form.Label>
+                    <Form.Control ref={inputRefUserName} onKeyUp={updateUserName} placeholder="enter user name..."/>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control ref={inputRefPassword} onKeyUp={updatePassword} placeholder="enter password..."/>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridIsDriver">
+                    <Form.Label>driver</Form.Label>
                     <h1></h1>
-                    <FormControlLabel id="inp" control={<Checkbox />} label="" name="isDriver" ref={inputRefIsDriver} onKeyUp={updateIsDriver} />
-                    {/* <input type="checkbox" name="isDriver" ref={inputRefIsDriver} onKeyUp={updateIsDriver} /> */}
+                    <FormControlLabel id="inp" control={<Checkbox />}
+                        label=""  ref={inputRefIsDriver}
+                        onKeyUp={updateIsDriver}  onChange={updateIsDriver}/>
                 </Form.Group>
-            </Row>
+                </Row>
             <Button color="primary" variant="contained" id="btnRegist"
-                onClick={() => {
-                    console.log(props.currentUser);
-                    debugger
-                    props.postUser({ id, firstName, lastName, birthDate, userName, password, fingerPrint, profile, isDriver,email})
-                }} >
+                onClick={() => { props.postUser({ id, firstName, lastName, birthDate, userName, password, fingerPrint, profileCode, isDriver, email }) }}>
                 Regist
             </Button>
-        </form>
+        </Form>
 
     </>)
 }

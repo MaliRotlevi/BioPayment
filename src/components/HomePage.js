@@ -6,18 +6,18 @@ import { Link } from "react-router-dom";
 import { Routes, Route } from 'react-router-dom';
 import Login from './Login'
 import Details from './Details'
-//import { Details } from '@material-ui/icons';
 import TravelsToUser from './TravelsToUser';
 import './HomePage.css';
 import Edit from './Edit';
- 
+import {logOutUser} from '../store/action/user';
+import {connect} from 'react-redux';
 
 const HomePage = (props) => {
     return (<>
         <div className='auth-wrapper'>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" id="nav1" className="auth-inner">
                 <Container>
-                    <Navbar.Brand href="HomePage">Bio-Payment</Navbar.Brand>
+                    <Navbar.Brand href="/">Bio-Payment</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
@@ -27,13 +27,15 @@ const HomePage = (props) => {
                             <NavDropdown title="personal area" id="collasible-nav-dropdown">
                                 <NavDropdown.Item ><Link to="/Details">details</Link></NavDropdown.Item>
                                 <NavDropdown.Item ><Link to="/TravelsToUser">travels-history</Link></NavDropdown.Item>
-                                <NavDropdown.Item ><Link to="/Edit">Edit Details</Link></NavDropdown.Item>
+                                <NavDropdown.Item ><Link to="/Edit" >Edit Details</Link></NavDropdown.Item>
 
                                 <NavDropdown.Divider />
                             </NavDropdown>
                         </Nav>
                         <Nav>
-                            <Nav.Link href="exit">exit</Nav.Link>
+                            <Nav.Link href="exit" onClick={()=>{props.logOutUser(null);
+                            console.log("exittt")
+                            }}>exit</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -65,4 +67,10 @@ const HomePage = (props) => {
 }
 
 
-export default HomePage;
+const mapStateToProps = (state) => {
+    return {
+      currentUser: state.user.currentUser
+    }
+  }
+  
+  export default connect(mapStateToProps, { logOutUser })(HomePage);

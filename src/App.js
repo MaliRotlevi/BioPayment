@@ -8,32 +8,7 @@ import HomePage from './components/HomePage';
 
 function App() {
   return (<>
-    <HomePage></HomePage> 
-    {/* <div className="auth-wrapper">
-      <div className="auth-inner"><Login></Login>
-      </div>
-    </div> 
-    <div className="auth-wrapper">
-      <div className="auth-inner">
-        <Register></Register>
-      </div>
-    </div>*/}
-    {/* <div className="auth-wrapper">
-      <div className="auth-inner">
-        <Login></Login>
-      </div>
-    </div> */}
-    {/* 
-      <br />
-      
-      <br />*/}
-      {/* <div className="auth-wrapper">
-      <div className="auth-inner">
-      <Loading></Loading>
-      </div>
-      </div> */}
-      {/* <br />
-    <TravelToUser></TravelToUser> */}
+    <HomePage></HomePage>     
   </> 
   );
 }
