@@ -3,13 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Row, Form, Button, ListGroup, ListGroupItem, Badge } from "react-bootstrap";
 import { connect } from "react-redux";
 import './Details.css';
+ import { getProfileName} from '../store/action/profile'
 
 
 
-const Details = (props) => {
-
-
-
+  const Details = (props) => {
+ 
   return (
     <>
       <h1>Details</h1>
@@ -32,7 +31,7 @@ const Details = (props) => {
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridProfile">
             <Form.Label>Profile</Form.Label>
-            <Form.Control disabled value={props.currentUser.profileCode} />
+            <Form.Control disabled value={props.getProfileName(props.currentUser.profileCode)} />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridUserName">
@@ -45,6 +44,12 @@ const Details = (props) => {
             <Form.Label>Password</Form.Label>
             <Form.Control value={props.currentUser.password} />
           </Form.Group>
+
+
+          <Button color="primary" variant="contained" id="btnRegist"
+          onClick={() => { props.getProfileName(props.currentUser.profileCode)}}>
+          Save Changes
+        </Button>
 
 
         </Row>
@@ -100,11 +105,14 @@ const Details = (props) => {
   )
 }
 
+
+
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.user.currentUser
-  }
+   currentUser: state.user.currentUser,
+   currentProfile:state.profile.currentProfile
+ } 
 }
-export default connect(mapStateToProps)(Details);
+ export default connect(mapStateToProps,{getProfileName})(Details);
 
 
