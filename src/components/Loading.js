@@ -2,51 +2,49 @@ import React, { useState, Component } from "react";
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import { ListGroup } from 'react-bootstrap'
 import './Loading.css'
 import { Dropdown, MenuItem, DropdownButton, Button } from "react-bootstrap";
 import { Col, Row, Form } from "react-bootstrap";
+import { connect } from 'react-redux';
+import { getConstracts } from '../store/action/constracts'
 
 
 
-export default function Loading() {
+const Loading = (props) => {
+    const [selectedContract, setSelectedContract] = React.useState('');
     const [showPaymentDetails, setshowPaymentDetails] = React.useState(false)
     const openPaymentDetails = () => setshowPaymentDetails(true)
+
+    const updateSelectedContract = (e) => {
+        debugger
+        const selected = e.target.key;
+        setSelectedContract(selected);
+    }
+
     return (
         <>
-            <h1 id='header'>Loading Constract</h1>
-            <div id="btnDropDown">
-                <Row className="mb-3" >
-                    <Form.Group as={Col} md="4" >
-                        <Dropdown>
-                            <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
-                                choose travel constract
-                            </Dropdown.Toggle>
+            <h1 id='header'>Loading Contract</h1>
 
-                            <Dropdown.Menu variant="dark">
-                                <Dropdown.Item href="#/action-1" active>
-                                    ערך צבור 100
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">ערך צבור 50</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">ערך צבור 200</Dropdown.Item>
-                                <Dropdown.Divider />
-                                <Dropdown.Item href="#/action-4">חופשי יומי</Dropdown.Item>
-                                <Dropdown.Item href="#/action-4">חופשי שנתי</Dropdown.Item>
-                                <Dropdown.Item href="#/action-4">חופשי חודשי</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </Form.Group>
-                </Row>
-                </div>
-                <div id="btnPaymentDetails">
+            <ListGroup>
+                {props.constractsList.map((con) =>
+                    <ListGroup.Item action key={con.contractCode} onClick={updateSelectedContract}>
+                        {con.contractName}
+                    </ListGroup.Item>
+                )}
+            </ListGroup>
+           <p>{selectedContract}</p> 
+            <br />
+            <div id="btnPaymentDetails">
                 <Row className="mb-3">
                     <Form.Group as={Col} md="4" >
-                        <Button  variant="primary" onClick={openPaymentDetails} size="lg">
+                        <Button variant="primary" onClick={openPaymentDetails} size="lg">
                             payment- details
                         </Button>
                     </Form.Group>
                 </Row>
-                </div>
-           
+            </div>
+
 
 
             {/* <div class="btn btn-primary mb-3" id="btnCon" onClick={openPaymentDetails}> <span class="ps-3">continue</span> <span class="fas fa-arrow-right"></span> </div> */}
@@ -91,14 +89,29 @@ export default function Loading() {
     )
 }
 
-function renderRow(props) {
-    const { index, style } = props;
-
-    return (
-        <ListItem style={style} key={index} component="div" disablePadding>
-            <ListItemButton>
-                <ListItemText primary={`Item ${index + 1}`} />
-            </ListItemButton>
-        </ListItem>
-    );
+const mapStateToProps = (state) => {
+    return {
+        constractsList: state.constracts.travelConstracts
+    }
 }
+export default connect(mapStateToProps, { getConstracts })(Loading);
+
+
+{/* <div id="btnDropDown">
+                <Row className="mb-3" >
+                    <Form.Group as={Col} md="4" >
+                        <Dropdown onChange={updateSelectedContract}>
+                            <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+                                choose travel contract
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu variant="dark">
+                                {props.constractsList.map((con)=>(
+                                 <Dropdown.Item href="#/action-1" key={con.contractCode}>{con.contractName}</Dropdown.Item>
+                                 ) )}
+                                <Dropdown.Divider />
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Form.Group>
+                </Row> */}
+{/* </div> */ }

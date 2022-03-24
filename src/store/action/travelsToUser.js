@@ -14,9 +14,9 @@ export const getTravelsToUser = (id) => {
     }
 }
 
-export const saveTravelsToUser = (travelsToUser) => {
+export const saveTravelsToUser = (travelsToUserList) => {
     return {
         type: ActionTypes.TRAVELSTOUSER_SAVED,
-        payload: travelsToUser
+        payload: travelsToUserList
     }
 }

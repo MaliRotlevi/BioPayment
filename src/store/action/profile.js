@@ -13,8 +13,9 @@ export const getProfileName = (num) => {
                     swal("Oops...", "This profile is not exist in the system", "error");
                 }
                 else {
-                    dispatch(saveProfile(num))
-                    return response.data
+                    dispatch(saveProfile(response.data))
+                    
+                    
 
                 }
             })
@@ -25,9 +26,9 @@ export const getProfileName = (num) => {
     }
 }
 
-export const saveProfile = (name) => {
+export const saveProfile = (profile) => {
     return {
         type: ActionTypes.SAVE_PROFILE,
-        payload: name
+        payload: profile
     }
 }

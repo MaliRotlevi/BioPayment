@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Button } from '@material-ui/core';
 import './Login.css';
 import Divider from '@mui/material/Divider';
-import{getTravelsToUser} from "../store/action/travelsToUser"
+import { ifThereIsSensor} from '../store/action/fingerPrint'
 
 
 const Login = (props) => {
@@ -65,6 +65,7 @@ const Login = (props) => {
       <div className="form-group">
         <label>FingerPrint</label>
         <input type="text" name="fingerPrint" className="form-control" placeholder="Enter finger print..." ref={inputRefFingerPrint} defaultValue={props.currentUser.userName} />
+        <Button onClick={()=>{props.ifThereIsSensor()}}>scan sensor</Button>
       </div>
       <h1> </h1>
       <Button color="primary" variant="contained" onClick={() => {
@@ -83,4 +84,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { logUser })(Login);
+export default connect(mapStateToProps, { logUser,ifThereIsSensor })(Login);

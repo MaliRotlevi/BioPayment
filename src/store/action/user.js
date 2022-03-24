@@ -1,17 +1,22 @@
 import * as ActionTypes from '../ActionTypes';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { getTravelsToUser } from './travelsToUser'
+import { getProfileName } from './profile';
+import { getConstracts } from './constracts';
+import { getConstractToUser } from './constractToUser'
 
 
 export const postUser = (user) => {
-    
+
     return (dispatch) => {
         axios.post(`https://localhost:44321/api/user/addUser`, user)
             .then(response => {
                 console.log(response.data);
                 dispatch(addUser(response.data));
+
                 swal("BARUCH HASHEM!", "Your details have been saved in the system", "success");
-                
+
 
             }
             )
@@ -33,6 +38,10 @@ export const logUser = (user) => {
                 else {
                     console.log(response.data);
                     dispatch(saveUser(response.data))
+                    dispatch(getTravelsToUser(response.data.id))
+                    dispatch(getProfileName(response.data.profileCode))
+                    dispatch(getConstractToUser(response.data.id))
+                    dispatch(getConstracts());
                     swal("Good job!", "you logged in!", "success");
 
                 }
@@ -54,9 +63,11 @@ export const updetaUser = (user) => {
             then(response => {
                 console.log(response);
                 dispatch(update(response.data))
+                swal("it's updated")
             })
             .catch(err => {
                 console.log(err);
+                swal("oops... there is problem with the update!!")
 
             })
     }

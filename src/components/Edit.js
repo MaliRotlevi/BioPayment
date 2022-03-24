@@ -71,7 +71,7 @@ const Edit = (props) => {
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridProfileCode">
             <Form.Label>Profile</Form.Label>
-            <Form.Control defaultValue={props.currentUser.profileCode} ref={inputRefProfileCode} onKeyUp={updateProfileCode} />
+            <Form.Control defaultValue={props.currentProfile.profileName} ref={inputRefProfileCode} onKeyUp={updateProfileCode} />
             <div style={{
               display: 'flex',
               margin: 'auto',
@@ -114,7 +114,8 @@ const Edit = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.user.currentUser
+    currentUser: state.user.currentUser,
+    currentProfile:state.profile.currentProfile
   }
 }
 export default connect(mapStateToProps, { updetaUser })(Edit);

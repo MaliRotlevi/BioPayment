@@ -3,12 +3,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Row, Form, Button, ListGroup, ListGroupItem, Badge } from "react-bootstrap";
 import { connect } from "react-redux";
 import './Details.css';
- import { getProfileName} from '../store/action/profile'
+import { getProfileName } from '../store/action/profile'
+import { getConstractToUser } from '../store/action/constractToUser'
+import {getConstracts} from '../store/action/constracts'
 
 
 
-  const Details = (props) => {
- 
+const Details = (props) => {
+
+   const getConstractName = (codeC) =>
+  {
+      
+     var x= props.constractsList.find((item)=>item.contractCode==codeC)
+     return x.contractName;
+
+  }
+
   return (
     <>
       <h1>Details</h1>
@@ -31,7 +41,7 @@ import './Details.css';
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridProfile">
             <Form.Label>Profile</Form.Label>
-            <Form.Control disabled value={props.getProfileName(props.currentUser.profileCode)} />
+            <Form.Control disabled value={props.currentProfile.profileName} />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridUserName">
@@ -44,61 +54,27 @@ import './Details.css';
             <Form.Label>Password</Form.Label>
             <Form.Control value={props.currentUser.password} />
           </Form.Group>
-
-
-          <Button color="primary" variant="contained" id="btnRegist"
-          onClick={() => { props.getProfileName(props.currentUser.profileCode)}}>
-          Save Changes
-        </Button>
-
-
         </Row>
-
-
-
-
       </Form>
 
-      <h3>Your active constracts </h3>
-
-
+      <h3>Your active contracts </h3>
+     
+     
       <ListGroup as="ol" numbered>
+      {props.constractToUserList.map((row)=>
         <ListGroup.Item
           as="li"
           className="d-flex justify-content-between align-items-start"
         >
           <div className="ms-2 me-auto">
-            <div className="fw-bold">Subheading</div>
-            Cras justo odio
+            <div className="fw-bold">{getConstractName(row.constractCode)}</div>
+             {getConstractName(row.constractCode)} 
           </div>
           <Badge variant="primary" pill>
-            14
+            {row.accumulatedAmount}
           </Badge>
         </ListGroup.Item>
-        <ListGroup.Item
-          as="li"
-          className="d-flex justify-content-between align-items-start"
-        >
-          <div className="ms-2 me-auto">
-            <div className="fw-bold">Subheading</div>
-            Cras justo odio
-          </div>
-          <Badge variant="primary" pill>
-            14
-          </Badge>
-        </ListGroup.Item>
-        <ListGroup.Item
-          as="li"
-          className="d-flex justify-content-between align-items-start"
-        >
-          <div className="ms-2 me-auto">
-            <div className="fw-bold">Subheading</div>
-            Cras justo odio
-          </div>
-          <Badge variant="primary" pill>
-            14
-          </Badge>
-        </ListGroup.Item>
+        )}
       </ListGroup>
     </>
 
@@ -109,10 +85,12 @@ import './Details.css';
 
 const mapStateToProps = (state) => {
   return {
-   currentUser: state.user.currentUser,
-   currentProfile:state.profile.currentProfile
- } 
+    currentUser: state.user.currentUser,
+    currentProfile: state.profile.currentProfile,
+    constractToUserList:state.constractToUser.constractsToUser,
+    constractsList: state.constracts.travelConstracts
+  }
 }
- export default connect(mapStateToProps,{getProfileName})(Details);
+export default connect(mapStateToProps)(Details);
 
 
