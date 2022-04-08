@@ -4,8 +4,7 @@ import swal from 'sweetalert';
 import { getTravelsToUser } from './travelsToUser'
 import { getProfileName } from './profile';
 import { getConstracts } from './constracts';
-import { getConstractToUser } from './constractToUser'
-
+import { getConstractToUser } from './constractToUser';
 
 export const postUser = (user) => {
 
@@ -57,10 +56,12 @@ export const logUser = (user) => {
 
 
 export const updetaUser = (user) => {
+    debugger
     return (dispatch) => {
         console.log(user);
         axios.put('https://localhost:44321/api/user/updateUser', user).
             then(response => {
+                debugger
                 console.log(response);
                 dispatch(update(response.data))
                 swal("it's updated")

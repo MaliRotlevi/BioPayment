@@ -51,7 +51,7 @@ const TravelsToUser = (props) => {
                                 {row.date}
                             </StyledTableCell>
                             <StyledTableCell >{row.travelCode}</StyledTableCell>
-                            <StyledTableCell >{row.price}</StyledTableCell>
+                            <StyledTableCell >5.9</StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>

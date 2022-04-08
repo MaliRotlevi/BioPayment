@@ -5,17 +5,23 @@ import { connect } from "react-redux";
 import './Details.css';
 import { getProfileName } from '../store/action/profile'
 import { getConstractToUser } from '../store/action/constractToUser'
-import {getConstracts} from '../store/action/constracts'
+import { getConstracts } from '../store/action/constracts'
 
 
 
 const Details = (props) => {
 
-   const getConstractName = (codeC) =>
-  {
-      
-     var x= props.constractsList.find((item)=>item.contractCode==codeC)
-     return x.contractName;
+  
+  const getConstractName = (codeC) => {
+
+    var x = props.constractsList.find((item) => item.contractCode == codeC)
+    return x.contractName;
+
+  }
+  const getConstractValue = (codeC) => {
+
+    var x = props.constractsList.find((item) => item.contractCode == codeC)
+    return x.price;
 
   }
 
@@ -58,24 +64,22 @@ const Details = (props) => {
       </Form>
 
       <h3>Your active contracts </h3>
-     
-     
+
+
       <ListGroup as="ol" numbered>
-      {props.constractToUserList.map((row)=>
-        <ListGroup.Item
-          as="li"
-          className="d-flex justify-content-between align-items-start"
-        >
-          <div className="ms-2 me-auto">
-            <div className="fw-bold">{getConstractName(row.constractCode)}</div>
-             {getConstractName(row.constractCode)} 
-          </div>
-          <Badge variant="primary" pill>
-            {row.accumulatedAmount}
-          </Badge>
-        </ListGroup.Item>
+        {props.constractToUserList.map((row) =>
+          <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start">
+            <div className="ms-2 me-auto">
+              <div className="fw-bold">{getConstractName(row.constractCode)}</div>
+              {getConstractName(row.constractCode)}
+            </div>
+            <Badge variant="primary" pill>
+              {getConstractValue(row.constractCode)}
+            </Badge>
+          </ListGroup.Item>
         )}
       </ListGroup>
+      <label></label>
     </>
 
   )
@@ -87,7 +91,7 @@ const mapStateToProps = (state) => {
   return {
     currentUser: state.user.currentUser,
     currentProfile: state.profile.currentProfile,
-    constractToUserList:state.constractToUser.constractsToUser,
+    constractToUserList: state.constractToUser.constractsToUser,
     constractsList: state.constracts.travelConstracts
   }
 }
