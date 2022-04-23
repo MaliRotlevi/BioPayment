@@ -4,23 +4,22 @@ import { Col, Row, Form, Button, ListGroup, ListGroupItem, Badge } from "react-b
 import { connect } from "react-redux";
 import './Details.css';
 import { getProfileName } from '../store/action/profile'
-import { getConstractToUser } from '../store/action/constractToUser'
-import { getConstracts } from '../store/action/constracts'
+import { getcontractToUser } from '../store/action/contractToUser'
+import { getcontracts } from '../store/action/contracts'
 
 
 
 const Details = (props) => {
 
   
-  const getConstractName = (codeC) => {
-
-    var x = props.constractsList.find((item) => item.contractCode == codeC)
+  const getcontractName = (codeC) => {
+    var x = props.contractsList.find((item) => item.contractCode == codeC)
     return x.contractName;
 
   }
-  const getConstractValue = (codeC) => {
+  const getcontractValue = (codeC) => {
 
-    var x = props.constractsList.find((item) => item.contractCode == codeC)
+    var x = props.contractsList.find((item) => item.contractCode == codeC)
     return x.price;
 
   }
@@ -67,14 +66,14 @@ const Details = (props) => {
 
 
       <ListGroup as="ol" numbered>
-        {props.constractToUserList.map((row) =>
+        {props.contractToUserList.map((row) =>
           <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start">
             <div className="ms-2 me-auto">
-              <div className="fw-bold">{getConstractName(row.constractCode)}</div>
-              {getConstractName(row.constractCode)}
+              <div className="fw-bold">{getcontractName(row.contractCode)}</div>
+              {getcontractName(row.contractCode)}
             </div>
             <Badge variant="primary" pill>
-              {getConstractValue(row.constractCode)}
+              {getcontractValue(row.contractCode)}
             </Badge>
           </ListGroup.Item>
         )}
@@ -91,8 +90,8 @@ const mapStateToProps = (state) => {
   return {
     currentUser: state.user.currentUser,
     currentProfile: state.profile.currentProfile,
-    constractToUserList: state.constractToUser.constractsToUser,
-    constractsList: state.constracts.travelConstracts
+    contractToUserList: state.contractToUser.contractsToUser,
+    contractsList: state.contracts.travelContracts
   }
 }
 export default connect(mapStateToProps)(Details);

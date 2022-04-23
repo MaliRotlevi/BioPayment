@@ -11,8 +11,8 @@ import Paper from '@mui/material/Paper';
 import { connect } from 'react-redux'
 import { getTravelsToUser } from '../store/action/travelsToUser';
 
-
 const TravelsToUser = (props) => {
+
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
@@ -33,6 +33,18 @@ const TravelsToUser = (props) => {
             border: 0,
         },
     }));
+
+    const findTravelByCode = (travelCode) => {
+        return props.travelsList.find((t) => {
+            return t.travelCode == travelCode
+        })
+    }
+
+    const formatDate = (string) => {
+        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(string).toLocaleDateString([], options);
+    }
+
     return (<>
         <h1>history</h1>
         <TableContainer component={Paper}>
@@ -45,13 +57,15 @@ const TravelsToUser = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.travelsList.map((row) => (
+                    {props.travelsToUserList.map((row) => (
                         <StyledTableRow key={row.date}>
                             <StyledTableCell component="th" scope="row">
-                                {row.date}
+                                {formatDate(row.date)}
+                                {"  "}
+                                {row.hour}
                             </StyledTableCell>
-                            <StyledTableCell >{row.travelCode}</StyledTableCell>
-                            <StyledTableCell >5.9</StyledTableCell>
+                            <StyledTableCell>{row.line}</StyledTableCell>
+                            <StyledTableCell>{row.price}</StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>
@@ -63,7 +77,7 @@ const TravelsToUser = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        travelsList: state.travelsToUser.travelsToUserList,
+        travelsToUserList: state.travelsToUser.travelsToUserList,
         currentUser: state.user.currentUser
     }
 }

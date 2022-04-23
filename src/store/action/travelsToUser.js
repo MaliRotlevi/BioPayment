@@ -1,5 +1,6 @@
 import * as ActionTypes from '../ActionTypes';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 export const getTravelsToUser = (id) => {
     return (dispatch) => {

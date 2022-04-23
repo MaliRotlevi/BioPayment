@@ -3,8 +3,9 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import { getTravelsToUser } from './travelsToUser'
 import { getProfileName } from './profile';
-import { getConstracts } from './constracts';
-import { getConstractToUser } from './constractToUser';
+import { getContracts } from './contracts';
+import { getContractToUser } from './contractToUser';
+import {getTravelsList} from './travels'
 
 export const postUser = (user) => {
 
@@ -39,8 +40,9 @@ export const logUser = (user) => {
                     dispatch(saveUser(response.data))
                     dispatch(getTravelsToUser(response.data.id))
                     dispatch(getProfileName(response.data.profileCode))
-                    dispatch(getConstractToUser(response.data.id))
-                    dispatch(getConstracts());
+                    dispatch(getContractToUser(response.data.id))
+                    dispatch(getContracts());
+                
                     swal("Good job!", "you logged in!", "success");
 
                 }

@@ -2,8 +2,8 @@ import React, { useState, Component } from "react";
 import { ListGroup } from 'react-bootstrap'
 import './Loading.css'
 import { connect } from 'react-redux';
-import { getConstracts } from '../store/action/constracts'
-import { addConsractToUser } from '../store/action/constractToUser'
+import { getContracts } from '../store/action/contracts'
+import { addConsractToUser } from '../store/action/contractToUser'
 
 
 const Loading = (props) => {
@@ -20,7 +20,7 @@ const Loading = (props) => {
         <>
             <h1 id='header'>Loading Contract</h1>
             <ListGroup>
-                {props.constractsList.map((con) => (
+                {props.contractsList.map((con) => (
                     <ListGroup.Item onClick={() => {
                         console.log(con.contractCode);                      
                         updateSelectedContract(con);
@@ -31,6 +31,7 @@ const Loading = (props) => {
                 ))}
             </ListGroup>
             <p>{selectedContract}</p>
+            <p>{props.currentUser.id}</p>
             <br />
             <div class="btn btn-primary mb-3" id="btnCon" onClick={openPaymentDetails}> <span class="ps-3">continue</span> <span class="fas fa-arrow-right"></span> </div>
             {showPaymentDetails ?
@@ -60,7 +61,7 @@ const Loading = (props) => {
                         </div>
                         <div class="col-12">
                             <div class="btn btn-primary mb-3" onClick={() => {
-                                props.addConsractToUser({ constractCode: selectedContract, userId: props.currentUser.userId, accumulatedAmount: 10, startDate: '01/01/1900', endDate: '05/03/2022' })
+                                props.addConsractToUser({ contractCode: selectedContract, userId: props.currentUser.id, accumulatedAmount: 10, startDate: '01/01/1900', endDate: '05/03/2022' })
                             }}> <span class="ps-3">Pay</span> <span class="fas fa-arrow-right"></span> </div>
                         </div>
                     </div>
@@ -73,11 +74,11 @@ const Loading = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        constractsList: state.constracts.travelConstracts,
+        contractsList: state.contracts.travelcontracts,
         currentUser: state.user.currentUser
     }
 }
-export default connect(mapStateToProps, { getConstracts, addConsractToUser })(Loading);
+export default connect(mapStateToProps, { getContracts, addConsractToUser })(Loading);
 
 {/* <div id="btnDropDown">
 <Row className="mb-3" >
@@ -88,7 +89,7 @@ export default connect(mapStateToProps, { getConstracts, addConsractToUser })(Lo
             </Dropdown.Toggle>
 
             <Dropdown.Menu variant="dark">
-                {props.constractsList.map((con)=>(
+                {props.contractsList.map((con)=>(
                  <Dropdown.Item href="#/action-1" key={con.contractCode}>{con.contractName}</Dropdown.Item>
                  ) )}
                 <Dropdown.Divider />
