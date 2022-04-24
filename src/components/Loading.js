@@ -74,7 +74,7 @@ const Loading = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        contractsList: state.contracts.travelcontracts,
+        contractsList: state.contracts.travelContracts,
         currentUser: state.user.currentUser
     }
 }
