@@ -32,3 +32,26 @@ export const saveProfile = (profile) => {
         payload: profile
     }
 }
+
+export const getAllProfiles = () => {
+    return (dispatch) => {
+        debugger
+        axios.get(`https://localhost:44321/api/profile/getAllProfiles`).
+            then(response => {
+                console.log(response.data);
+                console.log("insisde then Profilesssssss")
+                dispatch(saveProfiles(response.data))
+            })
+            .catch(err => {
+                console.log(err);
+                console.log("insisde catch profilessssss")
+            })
+    }
+}
+
+export const saveProfiles = (c) => {
+    return {
+        type: ActionTypes.PROFILES_SAVE,
+        payload: c
+    }
+}

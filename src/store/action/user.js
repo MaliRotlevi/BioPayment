@@ -2,7 +2,7 @@ import * as ActionTypes from '../ActionTypes';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { getTravelsToUser } from './travelsToUser'
-import { getProfileName } from './profile';
+import { getProfileName,getAllProfiles } from './profile';
 import { getContracts } from './contracts';
 import { getContractToUser } from './contractToUser';
 import {getTravelsList} from './travels'
@@ -42,6 +42,7 @@ export const logUser = (user) => {
                     dispatch(getProfileName(response.data.profileCode))
                     dispatch(getContractToUser(response.data.id))
                     dispatch(getContracts());
+                    dispatch(getAllProfiles());
                 
                     swal("Good job!", "you logged in!", "success");
 

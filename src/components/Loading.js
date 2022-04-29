@@ -3,18 +3,27 @@ import { ListGroup } from 'react-bootstrap'
 import './Loading.css'
 import { connect } from 'react-redux';
 import { getContracts } from '../store/action/contracts'
-import { addConsractToUser } from '../store/action/contractToUser'
+import { addConsractToUser,getContractToUser } from '../store/action/contractToUser'
+import * as moment from 'moment'
+
 
 
 const Loading = (props) => {
     const [selectedContract, setSelectedContract] = React.useState(0);
     const [showPaymentDetails, setshowPaymentDetails] = React.useState(false)
     const openPaymentDetails = () => setshowPaymentDetails(true)
-
+    const inputRefMoneyToAdd = React.createRef();
     const updateSelectedContract = (con) => {
         const selected=con.contractCode;
         setSelectedContract(selected);
     }
+   const moneyToAdd=0;
+    const updateMoneyToAdd=()=>
+    {
+        moneyToAdd=inputRefMoneyToAdd.current.value;
+        return moneyToAdd;
+    }
+
 
     return (
         <>
@@ -30,8 +39,10 @@ const Loading = (props) => {
                     </ListGroup.Item>
                 ))}
             </ListGroup>
-            <p>{selectedContract}</p>
-            <p>{props.currentUser.id}</p>
+
+           {selectedContract==1 && <input type="Number" placeholder="Enter sum of money" defaultValue={0} onChange={updateMoneyToAdd} ref={inputRefMoneyToAdd}/> }
+           {(selectedContract==2 || selectedContract==3||selectedContract==4 )&& <div><p>{new Date().toLocaleString().substring(0,9) + ""}</p><p>{moment().add(7,'d').toDate}</p></div>}
+            
             <br />
             <div class="btn btn-primary mb-3" id="btnCon" onClick={openPaymentDetails}> <span class="ps-3">continue</span> <span class="fas fa-arrow-right"></span> </div>
             {showPaymentDetails ?
@@ -61,7 +72,8 @@ const Loading = (props) => {
                         </div>
                         <div class="col-12">
                             <div class="btn btn-primary mb-3" onClick={() => {
-                                props.addConsractToUser({ contractCode: selectedContract, userId: props.currentUser.id, accumulatedAmount: 10, startDate: '01/01/1900', endDate: '05/03/2022' })
+                                props.addConsractToUser({ contractCode: selectedContract, userId: props.currentUser.id, accumulatedAmount: 0,isActive:true },parseFloat(moneyToAdd))
+                                props.getContractToUser(props.currentUser.id)
                             }}> <span class="ps-3">Pay</span> <span class="fas fa-arrow-right"></span> </div>
                         </div>
                     </div>
@@ -75,10 +87,11 @@ const Loading = (props) => {
 const mapStateToProps = (state) => {
     return {
         contractsList: state.contracts.travelContracts,
-        currentUser: state.user.currentUser
+        currentUser: state.user.currentUser,
+        
     }
 }
-export default connect(mapStateToProps, { getContracts, addConsractToUser })(Loading);
+export default connect(mapStateToProps, { getContracts, addConsractToUser,getContractToUser })(Loading);
 
 {/* <div id="btnDropDown">
 <Row className="mb-3" >

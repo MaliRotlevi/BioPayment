@@ -67,6 +67,12 @@ const Login = (props) => {
         <input type="text" name="fingerPrint" className="form-control" placeholder="Enter finger print..." ref={inputRefFingerPrint} defaultValue={props.currentUser.userName} />
         <Button onClick={()=>{props.ifThereIsSensor()}}>identify your fingerPrint</Button>
       </div>
+      <Divider>login with fingerPrint</Divider>
+      <div className="form-group">
+        <label>React FingerPrint</label>
+        <input type="text" name="fingerPrint" className="form-control" placeholder="Enter finger print..." ref={inputRefFingerPrint} defaultValue={props.currentUser.userName} />
+        <Button onClick={()=>{props.ifThereIsSensor()}}>identify your fingerPrint</Button>
+      </div>
       <h1> </h1>
       <Button color="primary" variant="contained" onClick={() => {
         props.logUser({ userName, userPassword });

@@ -4,7 +4,8 @@ const initialState = {
     currentProfile: {
         profileCode:0,
         profileName:''
-    }
+    },
+    profiles: [{}]
 }
 export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -14,6 +15,8 @@ export const profileReducer = (state = initialState, action) => {
                 return { ...state, currentProfile: action.payload }
 
             }
+         case ActionTypes.PROFILES_SAVE:
+                return { ...state, profiles: action.payload }     
             return state;
         }
         return state;

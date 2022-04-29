@@ -13,14 +13,17 @@ const Details = (props) => {
 
   
   const getcontractName = (codeC) => {
+    debugger
     var x = props.contractsList.find((item) => item.contractCode == codeC)
     return x.contractName;
 
   }
   const getcontractValue = (codeC) => {
-
-    var x = props.contractsList.find((item) => item.contractCode == codeC)
-    return x.price;
+    debugger
+    var x = props.contractToUserList.find((item) => item.userId==(props.currentUser.id).substring(0,9) && item.contractCode==codeC)
+    
+    console.log(x.accumulatedAmount);
+    return x.accumulatedAmount;
 
   }
 
@@ -70,7 +73,7 @@ const Details = (props) => {
           <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start">
             <div className="ms-2 me-auto">
               <div className="fw-bold">{getcontractName(row.contractCode)}</div>
-              {getcontractName(row.contractCode)}
+              {getcontractValue(row.contractCode)}
             </div>
             <Badge variant="primary" pill>
               {getcontractValue(row.contractCode)}
