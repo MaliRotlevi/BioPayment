@@ -59,12 +59,12 @@ export const logUser = (user) => {
 
 
 export const updetaUser = (user) => {
-    debugger
+    
     return (dispatch) => {
         console.log(user);
         axios.put('https://localhost:44321/api/user/updateUser', user).
             then(response => {
-                debugger
+                
                 console.log(response);
                 dispatch(update(response.data))
                 swal("it's updated")

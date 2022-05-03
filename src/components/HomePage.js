@@ -11,6 +11,7 @@ import './HomePage.css';
 import Edit from './Edit';
 import {logOutUser} from '../store/action/user';
 import {connect} from 'react-redux';
+import swal from 'sweetalert';
 
 const HomePage = (props) => {
     return (<>
@@ -34,7 +35,7 @@ const HomePage = (props) => {
                         </Nav>
                         <Nav>
                             <Nav.Link href="exit" onClick={()=>{props.logOutUser(null);
-                            console.log("exittt")
+                            swal("bye bye","you logged out successfully",'success');
                             }}>exit</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>

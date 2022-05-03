@@ -16,20 +16,25 @@ import swal from 'sweetalert';
 //             })
 //     }
 // }
-export const addConsractToUser = (c, moneyToAdd=0) => {
+export const addConsractToUser = (c, moneyToAdd = 0) => {
     return (dispatch) => {
+
         debugger
-        //{ contractCode: selectedContract, userId: props.currentUser.id, accumulatedAmount: 10, startDate: '01/01/1900', endDate: '05/03/2022' }
-       axios.post(`https://localhost:44321/api/contractToUser/addcontractToUser?moneyToAdd=${moneyToAdd}`,c)   
-       .then(res => {
-                debugger
-                console.log(res.data)
-                
+        axios.post(`https://localhost:44321/api/contractToUser/addcontractToUser?moneyToAdd=${moneyToAdd}`, c)
+            .then(res => {
+
+                console.log("1", res.data)
+
                 dispatch(addContract(res.data));
-                
+                console.log("2", res.data)
                 swal("the contract added successfully")
+                dispatch(getContractToUser(c.userId));
+                console.log("3", res.data)
+
             })
             .catch(err => {
+
+                swal("Oops", "You don't need that contract, you have another active!", "warning")
                 console.log(err);
             }
             )

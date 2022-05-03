@@ -10,6 +10,12 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { ComboBox, Item, Section } from '@adobe/react-spectrum'
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
+
 
 
 
@@ -28,6 +34,12 @@ const Edit = (props) => {
   const inputRefPassword = React.createRef()
   const inputRefUserName = React.createRef()
   const inputRefProfileCode = React.createRef()
+
+
+  // let [majorId, setMajorId] = React.useState();
+
+
+
 
 
   const updateFirstName = () => {
@@ -52,8 +64,8 @@ const Edit = (props) => {
     const inputTextUserName = inputRefUserName.current.value
     setUserName(inputTextUserName);
   }
-  const updateProfileCode = (event) => {
-    const inputTextProfileCode = event.target.value
+  const updateProfileCode = (code) => {
+    const inputTextProfileCode = code
     setProfileCode(inputTextProfileCode);
   }
 
@@ -77,43 +89,7 @@ const Edit = (props) => {
           </Form.Group>
         </Row>
         <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridProfileCode">
-            <FormControl>
-              <Box sx={{ minWidth: 180 }}>
-                <Form.Label>Profile</Form.Label>
-                <br />
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={profileCode}
-                  label="Profile"
-                  onChange={updateProfileCode}
-                >
-                  {props.profilesList.map((p) => (
-                    <MenuItem key={p.profileCode} value={p.profileCode}>
-                      {p.profileName}
-                    </MenuItem>
 
-                  ))}
-                </Select>
-              </Box>
-              <br />
-              <input
-                type="file"
-                accept="*.pdf"
-                style={{ display: 'none' }}
-                id="contained-button-file"
-              />
-              <label htmlFor="contained-button-file">
-                <Button variant="contained" color="primary" component="span">
-                  Upload
-                </Button>
-              </label>
-            </FormControl>
-
-
-
-          </Form.Group>
 
           <Form.Group as={Col} controlId="formGridUserName">
             <Form.Label>User Name</Form.Label>
@@ -123,11 +99,42 @@ const Edit = (props) => {
             <Form.Label>Password</Form.Label>
             <Form.Control defaultValue={props.currentUser.password} ref={inputRefPassword} onKeyUp={updatePassword} pattern="[^\s]+" />
           </Form.Group>
+          <Form.Group as={Col} controlId="formGridProfile">
+            <FormControl>
+              <Form.Label>Profiles:</Form.Label>
+              <label>{props.currentProfile.profileName}</label>
+              <RadioGroup
+                row
+                aria-labelledby="demo-form-control-label-placement"
+                name="position"
+                defaultValue="top"
+              >
+                <FormControlLabel value="student" control={<Radio />} label="student" onChange={() => { updateProfileCode(1) }} />
+                <FormControlLabel value="young" control={<Radio />} label="young" onChange={() => { updateProfileCode(2) }} />
+                <br />
+                <FormControlLabel value="adult" control={<Radio />} label="adult" onChange={() => { updateProfileCode(3) }} />
+                <FormControlLabel value="elderly" control={<Radio />} label="elderly" onChange={() => { updateProfileCode(4) }} />
+              </RadioGroup>
+              <input type="file" accept="*.pdf" style={{ display: 'none' }} id="contained-button-file" />
+              <label htmlFor="contained-button-file">
+                <Button variant="contained" color="primary" component="span">
+                  Upload File
+                </Button>
+              </label>
+            </FormControl>
+          </Form.Group>
+
+
+
+
+
         </Row>
         <Button color="primary" variant="contained" id="btnRegist"
           onClick={() => { props.updetaUser({ id: props.currentUser.id, firstName, lastName, birthDate: props.currentUser.birthDate, userName, password, fingerPrint: props.currentUser.fingerPrint, profileCode, isDriver: props.currentUser.isDriver, email }) }}>
           Save Changes
         </Button>
+
+
       </Form>
     </>
   )

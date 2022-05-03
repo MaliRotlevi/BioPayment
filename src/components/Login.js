@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core';
 import './Login.css';
 import Divider from '@mui/material/Divider';
 import { ifThereIsSensor} from '../store/action/fingerPrint'
+import swal from "sweetalert";
 
 
 const Login = (props) => {
@@ -64,15 +65,10 @@ const Login = (props) => {
       <Divider>login with fingerPrint</Divider>
       <div className="form-group">
         <label>FingerPrint</label>
-        <input type="text" name="fingerPrint" className="form-control" placeholder="Enter finger print..." ref={inputRefFingerPrint} defaultValue={props.currentUser.userName} />
-        <Button onClick={()=>{props.ifThereIsSensor()}}>identify your fingerPrint</Button>
+        <input type="text" name="fingerPrint" className="form-control" placeholder="Enter finger print..." ref={inputRefFingerPrint}/>
+        <Button onClick={()=>{swal("ho no","There is problem with the identifier",'error')}}>identify fingerPrint</Button>
       </div>
-      <Divider>login with fingerPrint</Divider>
-      <div className="form-group">
-        <label>React FingerPrint</label>
-        <input type="text" name="fingerPrint" className="form-control" placeholder="Enter finger print..." ref={inputRefFingerPrint} defaultValue={props.currentUser.userName} />
-        <Button onClick={()=>{props.ifThereIsSensor()}}>identify your fingerPrint</Button>
-      </div>
+     
       <h1> </h1>
       <Button color="primary" variant="contained" onClick={() => {
         props.logUser({ userName, userPassword });

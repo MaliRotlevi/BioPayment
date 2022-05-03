@@ -6,26 +6,31 @@ import './Details.css';
 import { getProfileName } from '../store/action/profile'
 import { getcontractToUser } from '../store/action/contractToUser'
 import { getcontracts } from '../store/action/contracts'
+import * as dd from 'date-fns'
 
 
 
 const Details = (props) => {
 
-  
+
   const getcontractName = (codeC) => {
-    debugger
     var x = props.contractsList.find((item) => item.contractCode == codeC)
     return x.contractName;
 
   }
   const getcontractValue = (codeC) => {
-    debugger
-    var x = props.contractToUserList.find((item) => item.userId==(props.currentUser.id).substring(0,9) && item.contractCode==codeC)
-    
-    console.log(x.accumulatedAmount);
+    var x = props.contractToUserList.find((item) => item.userId == (props.currentUser.id).substring(0, 9) && item.contractCode == codeC)
+   
+    console.log(x);
+    //console.log(x.accumulatedAmount);
     return x.accumulatedAmount;
 
   }
+
+  const formatDate = (string) => {
+    var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    return new Date(string).toLocaleDateString([], options);
+}
 
   return (
     <>
@@ -67,21 +72,20 @@ const Details = (props) => {
 
       <h3>Your active contracts </h3>
 
-
-      <ListGroup as="ol" numbered>
-        {props.contractToUserList.map((row) =>
-          <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start">
-            <div className="ms-2 me-auto">
-              <div className="fw-bold">{getcontractName(row.contractCode)}</div>
-              {getcontractValue(row.contractCode)}
-            </div>
-            <Badge variant="primary" pill>
-              {getcontractValue(row.contractCode)}
-            </Badge>
-          </ListGroup.Item>
-        )}
-      </ListGroup>
-      <label></label>
+      
+        <ListGroup as="ol" numbered >
+          {props.contractToUserList.map((row) =>
+            <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start">
+              <div className="ms-2 me-auto">
+                <div className="fw-bold">{getcontractName(row.contractCode)}</div>
+                {row.contractCode==1? getcontractValue(row.contractCode) : (formatDate(row.startDate) +' - ' + formatDate(row.endDate)) }
+              </div>
+             
+            </ListGroup.Item>
+          )}
+        </ListGroup>
+        <label></label>
+     
     </>
 
   )

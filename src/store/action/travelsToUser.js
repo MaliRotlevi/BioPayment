@@ -4,6 +4,7 @@ import swal from 'sweetalert';
 
 export const getTravelsToUser = (id) => {
     return (dispatch) => {
+        
         axios.get(`https://localhost:44321/api/travelsToUser/getAllTravelsToUser?id=${id}`)
             .then(response => {
                 console.log(response.data);

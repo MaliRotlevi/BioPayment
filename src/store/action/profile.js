@@ -35,7 +35,7 @@ export const saveProfile = (profile) => {
 
 export const getAllProfiles = () => {
     return (dispatch) => {
-        debugger
+        
         axios.get(`https://localhost:44321/api/profile/getAllProfiles`).
             then(response => {
                 console.log(response.data);

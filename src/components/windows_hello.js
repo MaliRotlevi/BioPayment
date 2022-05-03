@@ -12,21 +12,21 @@ const Windows_hello = (props) => {
 
         const publicKeyCredentialCreationOptions = {
             challenge: Uint8Array.from(
-                "randomStringFromServer", c => c.charCodeAt(0)),
+                "mockingRandomStringFromServer", c => c.charCodeAt(0)),
             rp: {
                 name: "Google",
                 id: "localhost",
             },
             user: {
                 id: Uint8Array.from(
-                    "UZSL85T9AFC", c => c.charCodeAt(0)),
+                    "ZwT1uG8gbv6ihEpYiiNogNlvZ2gCNC/eLOfihoovy7s=", c => c.charCodeAt(0)),
                 name: "mali.rotlevi@gmail.com",
                 displayName: "mali.rotlevi",
             },
             pubKeyCredParams: [{alg: -7, type: "public-key"}],
             authenticatorSelection: {
                 authenticatorAttachment: "platform",
-                userVerification: "discouraged",
+                userVerification: "required",
                 requireResidentKey: false
             },
             timeout: 60000,

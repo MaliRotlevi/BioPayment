@@ -1,3 +1,4 @@
+import swal from 'sweetalert';
 import * as ActionTypes from '../ActionTypes';
 
 
@@ -22,8 +23,8 @@ export const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case ActionTypes.SAVE_USER:
             {
-                
                 return { ...state, currentUser: action.payload }
+                
 
             }
         case ActionTypes.ADD_USER:

@@ -5,8 +5,15 @@ import { postUser } from '../store/action/user'
 import { Button } from '@material-ui/core';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import validator from 'validator';
 import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import isEmail from 'validator/lib/isEmail';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControl from '@mui/material/FormControl';
+
+
 
 const Register = (props) => {
 
@@ -20,6 +27,8 @@ const Register = (props) => {
     const [isDriver, setIsDriver] = useState('');
     const [fingerPrint, setFingerPrint] = useState('');
     const [email, setEmail] = useState('');
+    let [emailError, setEmailError] = useState("");
+
 
 
     const inputRefId = React.createRef()
@@ -34,7 +43,17 @@ const Register = (props) => {
     const inputRefEmail = React.createRef()
 
 
+    let validateEmail = () => {
+        setEmail(inputRefEmail.current.value);
+        //console.log(email);
+        if (validator.isEmail(email)) {
+            setEmailError('Valid Email :)');
+        } else {
+            setEmailError('Enter valid Email!');
+        }
+        //console.log(email);
 
+    }
 
     const updateId = () => {
         const inputTextId = inputRefId.current.value
@@ -52,8 +71,8 @@ const Register = (props) => {
         const inputTextBirthDate = inputRefBirthDate.current.value
         setBirthDate(inputTextBirthDate);
     }
-    const updateProfie = () => {
-        const inputProfile = inputRefProfile.current.value;
+    const updateProfie = (c) => {
+        const inputProfile = c;
         setProfile(inputProfile);
     }
     const updatePassword = () => {
@@ -97,24 +116,33 @@ const Register = (props) => {
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridEmail">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control ref={inputRefEmail} onKeyUp={updateEmail} placeholder="enter email..." />
+                    <Form.Control ref={inputRefEmail} onKeyUp={() => {
+                        updateEmail();
+                        validateEmail();
+                    }} placeholder="enter email..." />
+                    <p>{emailError}</p>
                 </Form.Group>
-                <Form.Group as={Col} controlId="formGridProfileCode">
-                    <Form.Label>Profile</Form.Label>
-                    <Form.Control ref={inputRefProfile} onKeyUp={updateProfie} placeholder="enter profile..." />
-                    <div style={{
-                        display: 'flex',
-                        margin: 'auto',
-                        width: 400,
-                        flexWrap: 'wrap',
-                    }}>
+                <Form.Group as={Col} controlId="formGridProfile">
+                    <FormControl>
+                        <Form.Label>Profiles:</Form.Label>
+                        <RadioGroup
+                            row
+                            aria-labelledby="demo-form-control-label-placement"
+                            name="position"
+                            defaultValue="top"
+                        >
+                            <FormControlLabel value="student" control={<Radio />} label="student" onChange={() => { updateProfie(1) }} />
+                            <FormControlLabel value="young" control={<Radio />} label="young" onChange={() => { updateProfie(2) }} />
+                            <FormControlLabel value="adult" control={<Radio />} label="adult" onChange={() => { updateProfie(3) }} />
+                            <FormControlLabel value="elderly" control={<Radio />} label="elderly" onChange={() => { updateProfie(4) }} />
+                        </RadioGroup>
                         <input type="file" accept="*.pdf" style={{ display: 'none' }} id="contained-button-file" />
                         <label htmlFor="contained-button-file">
                             <Button variant="contained" color="primary" component="span">
-                                Upload
+                                Upload File
                             </Button>
                         </label>
-                    </div>
+                    </FormControl>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridBirthDate">
                     <Form.Label>birthDate</Form.Label>
@@ -122,27 +150,21 @@ const Register = (props) => {
                 </Form.Group>
             </Row>
             <Row className="mb-3">
-            <Form.Group as={Col} controlId="formGridUserName">
+                <Form.Group as={Col} controlId="formGridUserName">
                     <Form.Label>User Name</Form.Label>
-                    <Form.Control ref={inputRefUserName} onKeyUp={updateUserName} placeholder="enter user name..."/>
+                    <Form.Control ref={inputRefUserName} onKeyUp={updateUserName} placeholder="enter user name..." />
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control ref={inputRefPassword} onKeyUp={updatePassword} placeholder="enter password..."/>
+                    <Form.Control ref={inputRefPassword} onKeyUp={updatePassword} placeholder="enter password..." />
                 </Form.Group>
-                <Form.Group as={Col} controlId="formGridIsDriver">
-                    <Form.Label>driver</Form.Label>
-                    <h1></h1>
-                    <FormControlLabel id="inp" control={<Checkbox />}
-                        label=""  ref={inputRefIsDriver}
-                        onKeyUp={updateIsDriver}  onChange={updateIsDriver}/>
-                </Form.Group>
-                </Row>
+                
+            </Row>
             <Button color="primary" variant="contained" id="btnRegist"
                 onClick={() => { props.postUser({ id, firstName, lastName, birthDate, userName, password, fingerPrint, profileCode, isDriver, email }) }}>
                 Regist
             </Button>
-        </Form>
+        </Form >
 
     </>)
 }
