@@ -19,7 +19,7 @@ import swal from 'sweetalert';
 export const addConsractToUser = (c, moneyToAdd = 0) => {
     return (dispatch) => {
 
-        debugger
+        
         axios.post(`https://localhost:44321/api/contractToUser/addcontractToUser?moneyToAdd=${moneyToAdd}`, c)
             .then(res => {
 
@@ -43,7 +43,7 @@ export const addConsractToUser = (c, moneyToAdd = 0) => {
 
 export const getContractToUser = (userId) => {
     return (dispatch) => {
-        debugger
+        
         axios.get(`https://localhost:44321/api/contractToUser/getContractsToUser?userId=${userId}`).
             then(response => {
                 console.log(response.data);
@@ -95,17 +95,17 @@ export const saveContractToUser = (c) => {
 }
 
 // export const addConsractToUser = (c, moneyToAdd = 0) => {
-//     debugger
+//     
 //     if (c.contractCode == 1) {
 //         return (dispatch) => {
 //             axios.get(`https://localhost:44321/api/contractToUser/ifExistStoredValue?userId=${c.userId}`).then(
 //                 response => {
-//                     debugger
+//                     
 //                     if (response.data == true) {
 //                         return (dispatch) => {
 //                             axios.put(`https://localhost:44321/api/contractToUser/updatecontractToUser?c=${c}&moneyToAdd=${moneyToAdd}`)
 //                                 .then(response => {
-//                                     debugger
+//                                     
 //                                     swal("added money to stored value");
 //                                 })
 //                         }

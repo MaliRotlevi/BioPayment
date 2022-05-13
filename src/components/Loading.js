@@ -72,7 +72,7 @@ const Loading = (props) => {
                         </div>
                         <div class="col-12">
                             <div class="d-flex flex-column">
-                                <p class="text mb-1">Card Number</p> <input class="form-control mb-3" type="text" placeholder="1234 5678 435678" required/>
+                                <p class="text mb-1">Card Number</p> <input class="form-control mb-3" type="text" placeholder="1234 5678 1234 5678" required/>
                             </div>
                         </div>
                         <div class="col-6">
